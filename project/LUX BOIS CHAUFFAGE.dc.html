@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="ds-modernist.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+  body { background: #dedcdc; }
+  .lbc-scroll::-webkit-scrollbar { width: 0; height: 0; }
+</style>
+</helmet>
+
+<section style="padding:48px 40px 80px;display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;align-items:baseline;gap:16px">
+    <span style="font-family:var(--font-heading);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;background:var(--color-accent);color:var(--color-bg);padding:4px 10px">1a</span>
+    <h2 style="margin:0;font-size:28px">LUX BOIS CHAUFFAGE — parcours mobile</h2>
+    <span class="text-muted" style="font-size:13px">6 écrans · Modernist · achat en ligne direct</span>
+  </div>
+
+  <div id="1a" style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start">
+
+    <!-- ACCUEIL -->
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#605d5d">01 — Accueil</span>
+      <div data-screen-label="Accueil" style="position:relative;width:390px;height:844px;display:flex;flex-direction:column;background:var(--color-bg);border:2px solid var(--color-divider);overflow:hidden">
+        <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:2px solid var(--color-divider);flex:none">
+          <button style="width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid var(--color-divider);background:transparent;cursor:pointer" onClick="{{ openMenu }}" aria-label="Menu">
+            <i class="ti ti-menu-2" style="font-size:22px"></i>
+          </button>
+          <div style="margin-right:auto;line-height:1">
+            <div style="font-family:var(--font-heading);font-weight:800;font-size:16px;letter-spacing:-.01em">LUX BOIS</div>
+            <div style="font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.22em;color:var(--color-accent)">CHAUFFAGE</div>
+          </div>
+          <button style="width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid var(--color-divider);background:transparent;cursor:pointer" aria-label="Rechercher">
+            <i class="ti ti-search" style="font-size:20px"></i>
+          </button>
+          <button style="position:relative;width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid var(--color-divider);background:transparent;cursor:pointer" aria-label="Panier">
+            <i class="ti ti-shopping-cart" style="font-size:20px"></i>
+            <span style="position:absolute;top:-1px;right:-1px;font-family:var(--font-heading);font-weight:800;font-size:11px;background:var(--color-accent);color:var(--color-bg);padding:0 5px;line-height:16px">{{ cartCount }}</span>
+          </button>
+        </div>
+
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;z-index:5;background:color-mix(in srgb, var(--color-neutral-900) 45%, transparent);display:flex;flex-direction:column">
+            <div style="background:var(--color-bg);border-bottom:2px solid var(--color-divider)">
+              <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:2px solid var(--color-divider)">
+                <span style="font-family:var(--font-heading);font-weight:800;font-size:14px;margin-right:auto">MENU</span>
+                <button style="width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--color-divider);background:transparent;cursor:pointer" onClick="{{ closeMenu }}" aria-label="Fermer">
+                  <i class="ti ti-x" style="font-size:20px"></i>
+                </button>
+              </div>
+              <sc-for list="{{ menuItems }}" as="m" hint-placeholder-count="6">
+                <button style="width:100%;display:flex;align-items:center;gap:12px;padding:14px;background:transparent;border:0;border-bottom:1px solid var(--color-divider);cursor:pointer;text-align:left;font-family:var(--font-body)" style-hover="background:var(--color-accent-100)">
+                  <i class="ti {{ m.icon }}" style="font-size:22px;color:var(--color-accent)"></i>
+                  <span style="flex:1">
+                    <span style="display:block;font-family:var(--font-heading);font-weight:800;font-size:14px">{{ m.label }}</span>
+                    <span class="text-muted" style="display:block;font-size:11px">{{ m.note }}</span>
+                  </span>
+                  <i class="ti ti-chevron-right" style="font-size:18px;color:var(--color-neutral-500)"></i>
+                </button>
+              </sc-for>
+              <div style="display:flex;gap:10px;padding:14px">
+                <a class="btn btn-primary" href="#" style="padding:12px 14px;flex:1"><i class="ti ti-phone" style="font-size:16px"></i>03 88 00 00 00</a>
+              </div>
+            </div>
+            <button style="flex:1;border:0;background:transparent;cursor:pointer" onClick="{{ closeMenu }}" aria-label="Fermer le menu"></button>
+          </div>
+        </sc-if>
+
+        <div class="lbc-scroll" style="flex:1;overflow-y:auto">
+          <div class="grayscale" style="height:280px;overflow:hidden">
+            <img src="https://images.unsplash.com/photo-1576791606138-89367074a68f?auto=format&amp;fit=crop&amp;q=70&amp;w=780&amp;h=560" alt="Pile de bois de chauffage fendu" style="width:100%;height:100%;object-fit:cover">
+          </div>
+
+          <div style="padding:20px 16px 24px;display:flex;flex-direction:column;gap:14px;border-bottom:2px solid var(--color-divider)">
+            <span style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700)">Bois sec garanti &lt; 20 % d'humidité</span>
+            <h1 style="margin:0;font-size:34px;line-height:1.04">Du bois coupé en Alsace, livré sec chez vous.</h1>
+            <p style="margin:0;font-size:14px;max-width:32ch">Chêne, hêtre et charme issus de forêts gérées à moins de 100 km de notre scierie. Séchage 24 mois, livraison en 48/72 h.</p>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <a class="btn btn-primary btn-block" href="#" style="padding:13px 16px;font-size:15px">Commander mon bois →</a>
+              <a class="btn btn-secondary btn-block" href="#" style="padding:13px 16px;font-size:15px">Calculer mon volume</a>
+            </div>
+          </div>
+
+          <div style="border-bottom:2px solid var(--color-divider)">
+            <sc-for list="{{ promises }}" as="p" hint-placeholder-count="5">
+              <div style="display:flex;gap:12px;align-items:baseline;padding:13px 16px;border-bottom:1px solid var(--color-divider)">
+                <span style="font-family:ui-monospace,monospace;font-size:10px;color:var(--color-accent);flex:none;width:20px">{{ p.num }}</span>
+                <div>
+                  <div style="font-family:var(--font-heading);font-weight:800;font-size:14px">{{ p.title }}</div>
+                  <div class="text-muted" style="font-size:12px">{{ p.body }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="padding:20px 16px;border-bottom:2px solid var(--color-divider)">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px">
+              <h3 style="margin:0;font-size:22px">Nos bois</h3>
+              <a href="#" style="font-size:13px">Tout voir</a>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <sc-for list="{{ featured }}" as="it" hint-placeholder-count="4">
+                <div style="display:flex;flex-direction:column;background:var(--color-surface)">
+                  <div class="grayscale" style="height:104px;overflow:hidden;background:var(--color-neutral-300)"><img src="{{ it.img }}" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+                  <div style="padding:10px;display:flex;flex-direction:column;gap:6px;flex:1">
+                    <div style="font-family:var(--font-heading);font-weight:800;font-size:13px;line-height:1.15">{{ it.name }}</div>
+                    <div class="text-muted" style="font-size:11px;margin-top:auto">{{ it.spec }}</div>
+                    <div style="font-family:var(--font-heading);font-weight:800;font-size:15px">{{ it.priceLabel }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background:var(--color-accent);color:var(--color-bg);padding:26px 16px;display:flex;flex-direction:column;gap:10px">
+            <span style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.85">Zone de livraison</span>
+            <div style="font-family:var(--font-heading);font-weight:800;font-size:28px;line-height:1.05">100 km autour de Steinbourg. Et un dépôt à Paris.</div>
+            <p style="margin:0;font-size:13px;opacity:.9">Déchargement au plus près du stockage. Créneau confirmé la veille par SMS.</p>
+          </div>
+
+          <div style="padding:20px 16px;border-bottom:2px solid var(--color-divider)">
+            <h3 style="margin:0 0 12px;font-size:22px">Ils se chauffent chez nous</h3>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="2">
+                <div style="border-left:2px solid var(--color-accent);padding:2px 0 2px 12px">
+                  <p style="margin:0 0 4px;font-size:13px">{{ r.quote }}</p>
+                  <div class="text-muted" style="font-size:11px">{{ r.author }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background:var(--color-neutral-900);color:var(--color-neutral-100)">
+            <div style="padding:22px 16px 18px;border-bottom:1px solid color-mix(in srgb, #f8f4f4 22%, transparent)">
+              <div style="font-family:var(--font-heading);font-weight:800;font-size:18px;line-height:1">LUX BOIS</div>
+              <div style="font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.22em;color:var(--color-accent-400);margin-top:3px">CHAUFFAGE</div>
+              <p style="margin:12px 0 0;font-size:13px;opacity:.75;max-width:30ch">Scierie familiale à Steinbourg. Bois sec, coupé et séché sur place depuis 1974.</p>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr">
+              <div style="padding:16px;border-right:1px solid color-mix(in srgb, #f8f4f4 22%, transparent);border-bottom:1px solid color-mix(in srgb, #f8f4f4 22%, transparent)">
+                <div style="font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;margin-bottom:8px">Boutique</div>
+                <div style="display:flex;flex-direction:column;gap:6px;font-size:13px">
+                  <span>Bûches de bois dur</span>
+                  <span>Bûches compressées</span>
+                  <span>Granulés DIN+</span>
+                  <span>Allumage &amp; charbon</span>
+                  <span>Bois de cuisson pro</span>
+                </div>
+              </div>
+              <div style="padding:16px;border-bottom:1px solid color-mix(in srgb, #f8f4f4 22%, transparent)">
+                <div style="font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;margin-bottom:8px">Maison</div>
+                <div style="display:flex;flex-direction:column;gap:6px;font-size:13px">
+                  <span>Notre bois</span>
+                  <span>Livraison &amp; zones</span>
+                  <span>Calculer mon volume</span>
+                  <span>Devis professionnel</span>
+                  <span>Contact</span>
+                </div>
+              </div>
+            </div>
+            <div style="padding:16px;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid color-mix(in srgb, #f8f4f4 22%, transparent)">
+              <div style="display:flex;align-items:center;gap:10px;font-size:13px"><i class="ti ti-map-pin" style="font-size:18px;color:var(--color-accent-400)"></i>12 route de la Forêt, 67790 Steinbourg</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:13px"><i class="ti ti-phone" style="font-size:18px;color:var(--color-accent-400)"></i>03 88 00 00 00 · lun–sam 8h–18h</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:13px"><i class="ti ti-truck-delivery" style="font-size:18px;color:var(--color-accent-400)"></i>Alsace 100 km · dépôt Paris</div>
+              <div style="display:flex;gap:8px;margin-top:4px">
+                <span style="width:38px;height:38px;display:grid;place-items:center;border:1px solid color-mix(in srgb, #f8f4f4 30%, transparent)"><i class="ti ti-brand-facebook" style="font-size:18px"></i></span>
+                <span style="width:38px;height:38px;display:grid;place-items:center;border:1px solid color-mix(in srgb, #f8f4f4 30%, transparent)"><i class="ti ti-brand-instagram" style="font-size:18px"></i></span>
+                <span style="width:38px;height:38px;display:grid;place-items:center;border:1px solid color-mix(in srgb, #f8f4f4 30%, transparent)"><i class="ti ti-mail" style="font-size:18px"></i></span>
+              </div>
+            </div>
+            <div style="padding:14px 16px;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:11px;opacity:.6">
+              <span>© 2026 Lux Bois Chauffage</span>
+              <span>CGV</span>
+              <span>Mentions légales</span>
+              <span>Paiement sécurisé</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOUTIQUE -->
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#605d5d">02 — Boutique</span>
+      <div data-screen-label="Boutique" style="position:relative;width:390px;height:844px;display:flex;flex-direction:column;background:var(--color-bg);border:2px solid var(--color-divider);overflow:hidden">
+        <div style="padding:12px 14px;border-bottom:2px solid var(--color-divider);flex:none;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <button style="width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid var(--color-divider);background:transparent;cursor:pointer" onClick="{{ openMenu }}" aria-label="Menu">
+              <i class="ti ti-menu-2" style="font-size:22px"></i>
+            </button>
+            <h4 style="margin:0;margin-right:auto;font-size:20px">Boutique</h4>
+            <button style="position:relative;width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid var(--color-divider);background:transparent;cursor:pointer" aria-label="Panier">
+              <i class="ti ti-shopping-cart" style="font-size:20px"></i>
+              <span style="position:absolute;top:-1px;right:-1px;font-family:var(--font-heading);font-weight:800;font-size:11px;background:var(--color-accent);color:var(--color-bg);padding:0 5px;line-height:16px">{{ cartCount }}</span>
+            </button>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="btn btn-secondary" style="padding:9px 12px;flex:none;gap:8px" onClick="{{ openFilter }}">
+              <i class="ti ti-adjustments-horizontal" style="font-size:18px"></i>{{ filterLabel }}
+            </button>
+            <span class="text-muted" style="font-size:12px;margin-left:auto">{{ resultCount }}</span>
+          </div>
+          <div style="display:flex;gap:6px;overflow-x:auto">
+            <sc-for list="{{ categories }}" as="c" hint-placeholder-count="4">
+              <button class="{{ c.cls }}" style="cursor:pointer;flex:none;font-size:12px;padding:6px 11px;background:transparent;font-family:var(--font-body)" onClick="{{ c.onClick }}">{{ c.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <sc-if value="{{ filterOpen }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:flex-end;background:color-mix(in srgb, var(--color-neutral-900) 45%, transparent)">
+            <button style="flex:1;border:0;background:transparent;cursor:pointer" onClick="{{ closeFilter }}" aria-label="Fermer les filtres"></button>
+            <div style="background:var(--color-bg);border-top:2px solid var(--color-text);display:flex;flex-direction:column;max-height:78%">
+              <div style="display:flex;align-items:center;gap:10px;padding:14px;border-bottom:2px solid var(--color-divider)">
+                <i class="ti ti-adjustments-horizontal" style="font-size:20px;color:var(--color-accent)"></i>
+                <span style="font-family:var(--font-heading);font-weight:800;font-size:16px;margin-right:auto">Filtrer &amp; trier</span>
+                <button class="btn btn-ghost" style="font-size:12px" onClick="{{ resetFilters }}">Réinitialiser</button>
+                <button style="width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--color-divider);background:transparent;cursor:pointer" onClick="{{ closeFilter }}" aria-label="Fermer">
+                  <i class="ti ti-x" style="font-size:18px"></i>
+                </button>
+              </div>
+
+              <div class="lbc-scroll" style="overflow-y:auto;flex:1">
+                <div style="padding:14px;border-bottom:1px solid var(--color-divider)">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+                    <i class="ti ti-tree" style="font-size:16px;color:var(--color-neutral-600)"></i>
+                    <span style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#605d5d">Essence</span>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:2px">
+                    <sc-for list="{{ essenceOptions }}" as="e" hint-placeholder-count="5">
+                      <button style="display:flex;align-items:center;gap:10px;padding:9px 0;background:transparent;border:0;cursor:pointer;text-align:left;font-family:var(--font-body);font-size:14px" onClick="{{ e.onClick }}">
+                        <i class="ti {{ e.icon }}" style="font-size:20px;color:{{ e.fg }}"></i>
+                        <span style="flex:1">{{ e.label }}</span>
+                        <span class="text-muted" style="font-size:12px">{{ e.count }}</span>
+                      </button>
+                    </sc-for>
+                  </div>
+                </div>
+
+                <div style="padding:14px;border-bottom:1px solid var(--color-divider)">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+                    <i class="ti ti-ruler-2" style="font-size:16px;color:var(--color-neutral-600)"></i>
+                    <span style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#605d5d">Longueur de bûche</span>
+                  </div>
+                  <div style="display:flex;border:1px solid var(--color-divider);width:fit-content">
+                    <sc-for list="{{ lengthOptions }}" as="l" hint-placeholder-count="3">
+                      <button style="cursor:pointer;font-family:var(--font-body);font-size:13px;padding:9px 15px;border:0;border-left:1px solid var(--color-divider);background:{{ l.bg }};color:{{ l.fg }}" onClick="{{ l.onClick }}">{{ l.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+
+                <div style="padding:14px">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+                    <i class="ti ti-arrows-sort" style="font-size:16px;color:var(--color-neutral-600)"></i>
+                    <span style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#605d5d">Trier par</span>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:2px">
+                    <sc-for list="{{ sortOptions }}" as="s" hint-placeholder-count="3">
+                      <button style="display:flex;align-items:center;gap:10px;padding:9px 0;background:transparent;border:0;cursor:pointer;text-align:left;font-family:var(--font-body);font-size:14px" onClick="{{ s.onClick }}">
+                        <i class="ti {{ s.icon }}" style="font-size:20px;color:{{ s.fg }}"></i>
+                        <span>{{ s.label }}</span>
+                      </button>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+
+              <div style="padding:12px 14px;border-top:2px solid var(--color-divider)">
+                <button class="btn btn-primary btn-block" style="padding:14px 16px;font-size:15px;margin-top:0" onClick="{{ closeFilter }}">{{ applyLabel }}</button>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;z-index:6;background:color-mix(in srgb, var(--color-neutral-900) 45%, transparent);display:flex;flex-direction:column">
+            <div style="background:var(--color-bg);border-bottom:2px solid var(--color-divider)">
+              <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:2px solid var(--color-divider)">
+                <span style="font-family:var(--font-heading);font-weight:800;font-size:14px;margin-right:auto">MENU</span>
+                <button style="width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--color-divider);background:transparent;cursor:pointer" onClick="{{ closeMenu }}" aria-label="Fermer">
+                  <i class="ti ti-x" style="font-size:20px"></i>
+                </button>
+              </div>
+              <sc-for list="{{ menuItems }}" as="m" hint-placeholder-count="6">
+                <button style="width:100%;display:flex;align-items:center;gap:12px;padding:14px;background:transparent;border:0;border-bottom:1px solid var(--color-divider);cursor:pointer;text-align:left;font-family:var(--font-body)" style-hover="background:var(--color-accent-100)">
+                  <i class="ti {{ m.icon }}" style="font-size:22px;color:var(--color-accent)"></i>
+                  <span style="flex:1">
+                    <span style="display:block;font-family:var(--font-heading);font-weight:800;font-size:14px">{{ m.label }}</span>
+                    <span class="text-muted" style="display:block;font-size:11px">{{ m.note }}</span>
+                  </span>
+                  <i class="ti ti-chevron-right" style="font-size:18px;color:var(--color-neutral-500)"></i>
+                </button>
+              </sc-for>
+            </div>
+            <button style="flex:1;border:0;background:transparent;cursor:pointer" onClick="{{ closeMenu }}" aria-label="Fermer le menu"></button>
+          </div>
+        </sc-if>
+
+        <div class="lbc-scroll" style="flex:1;overflow-y:auto">
+          <sc-for list="{{ visibleProducts }}" as="p" hint-placeholder-count="5">
+            <div style="display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--color-divider)">
+              <div class="grayscale" style="width:92px;height:92px;flex:none;overflow:hidden;background:var(--color-neutral-300)"><img src="{{ p.img }}" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+              <div style="display:flex;flex-direction:column;gap:5px;flex:1;min-width:0">
+                <div style="font-family:var(--font-heading);font-weight:800;font-size:14px;line-height:1.2">{{ p.name }}</div>
+                <div class="text-muted" style="font-size:11px">{{ p.spec }}</div>
+                <div style="display:flex;align-items:flex-end;gap:8px;margin-top:auto">
+                  <div style="font-family:var(--font-heading);font-weight:800;font-size:16px;margin-right:auto">{{ p.priceLabel }}</div>
+                  <button class="btn btn-primary" style="padding:8px 12px;gap:6px" onClick="{{ p.add }}"><i class="ti ti-plus" style="font-size:15px"></i>Ajouter</button>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+          <div style="padding:20px 16px;display:flex;flex-direction:column;gap:8px;background:var(--color-surface)">
+            <div style="font-family:var(--font-heading);font-weight:800;font-size:15px">Prix dégressif au volume</div>
+            <p class="text-muted" style="margin:0;font-size:12px">1 stère 89 € · 3 stères 84 €/st · 5 stères et + 79 €/st. Remise appliquée automatiquement au panier.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FICHE PRODUIT -->
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#605d5d">03 — Fiche produit</span>
+      <div data-screen-label="Fiche produit" style="width:390px;height:844px;display:flex;flex-direction:column;background:var(--color-bg);border:2px solid var(--color-divider);overflow:hidden">
+        <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:2px solid var(--color-divider);flex:none">
+          <button style="width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid var(--color-divider);background:transparent;cursor:pointer" aria-label="Retour">
+            <i class="ti ti-arrow-left" style="font-size:20px"></i>
+          </button>
+          <span style="font-size:13px;margin-right:auto">Bûches</span>
+          <button style="width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid var(--color-divider);background:transparent;cursor:pointer" aria-label="Favori">
+            <i class="ti ti-heart" style="font-size:20px"></i>
+          </button>
+          <button style="position:relative;width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid var(--color-divider);background:transparent;cursor:pointer" aria-label="Panier">
+            <i class="ti ti-shopping-cart" style="font-size:20px"></i>
+            <span style="position:absolute;top:-1px;right:-1px;font-family:var(--font-heading);font-weight:800;font-size:11px;background:var(--color-accent);color:var(--color-bg);padding:0 5px;line-height:16px">{{ cartCount }}</span>
+          </button>
+        </div>
+
+        <div class="lbc-scroll" style="flex:1;overflow-y:auto">
+          <div class="grayscale" style="height:260px;overflow:hidden">
+            <img src="https://images.unsplash.com/photo-1759790475933-ec8f2d02fc65?auto=format&amp;fit=crop&amp;q=70&amp;w=780&amp;h=520" alt="Bûches de chêne 33 cm" style="width:100%;height:100%;object-fit:cover">
+          </div>
+
+          <div style="padding:18px 16px;display:flex;flex-direction:column;gap:12px;border-bottom:2px solid var(--color-divider)">
+            <div style="display:flex;gap:6px">
+              <span class="tag tag-accent">Sec &lt; 20 %</span>
+              <span class="tag tag-neutral">Chêne · Alsace</span>
+            </div>
+            <h2 style="margin:0;font-size:26px;line-height:1.06">Bûches de chêne 33 cm</h2>
+            <p style="margin:0;font-size:13px">Le bois de nos clients qui chauffent tout l'hiver : forte densité, longue combustion, peu de cendres. Séché 24 mois sous hangar ouvert.</p>
+            <div style="display:flex;align-items:baseline;gap:8px">
+              <span style="font-family:var(--font-heading);font-weight:800;font-size:30px">{{ pdpUnitPrice }}</span>
+              <span class="text-muted" style="font-size:13px">/ stère · {{ pdpTotal }} au total</span>
+            </div>
+          </div>
+
+          <div style="padding:16px;display:flex;flex-direction:column;gap:16px;border-bottom:2px solid var(--color-divider)">
+            <div>
+              <div style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#605d5d;margin-bottom:7px">Longueur</div>
+              <div style="display:flex;gap:0;border:1px solid var(--color-divider);width:fit-content">
+                <sc-for list="{{ lengths }}" as="l" hint-placeholder-count="3">
+                  <button style="cursor:pointer;font-family:var(--font-body);font-size:13px;padding:8px 14px;border:0;border-left:1px solid var(--color-divider);background:{{ l.bg }};color:{{ l.fg }}" onClick="{{ l.onClick }}">{{ l.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#605d5d;margin-bottom:7px">Volume (stères)</div>
+              <div style="display:flex;align-items:stretch;border:1px solid var(--color-divider);width:fit-content">
+                <button style="width:46px;height:46px;border:0;background:transparent;cursor:pointer;font-size:20px;font-family:var(--font-heading)" onClick="{{ decQty }}">–</button>
+                <div style="width:56px;display:grid;place-items:center;font-family:var(--font-heading);font-weight:800;font-size:18px;border-left:1px solid var(--color-divider);border-right:1px solid var(--color-divider)">{{ qty }}</div>
+                <button style="width:46px;height:46px;border:0;background:transparent;cursor:pointer;font-size:20px;font-family:var(--font-heading)" onClick="{{ incQty }}">+</button>
+              </div>
+              <div style="font-size:12px;margin-top:7px;color:var(--color-accent-700)">{{ discountNote }}</div>
+            </div>
+          </div>
+
+          <div style="padding:16px;border-bottom:2px solid var(--color-divider)">
+            <table class="table">
+              <tbody>
+                <sc-for list="{{ specs }}" as="s" hint-placeholder-count="5">
+                  <tr>
+                    <td class="text-muted" style="width:46%">{{ s.k }}</td>
+                    <td style="font-family:var(--font-heading);font-weight:800">{{ s.v }}</td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="padding:16px 16px 24px;display:flex;flex-direction:column;gap:10px">
+            <div style="font-family:var(--font-heading);font-weight:800;font-size:15px">Livraison</div>
+            <p class="text-muted" style="margin:0;font-size:12px">Camion-benne ou remorque selon l'accès. Déchargement en vrac devant le stockage, ou rangé sur palette (+29 €). Créneau de 2 h confirmé la veille.</p>
+          </div>
+        </div>
+
+        <div style="flex:none;border-top:2px solid var(--color-divider);padding:12px 16px;display:flex;gap:10px;align-items:center;background:var(--color-bg)">
+          <div style="margin-right:auto">
+            <div class="text-muted" style="font-size:11px">Total</div>
+            <div style="font-family:var(--font-heading);font-weight:800;font-size:18px">{{ pdpTotal }}</div>
+          </div>
+          <button class="btn btn-primary" style="padding:14px 18px;font-size:15px" onClick="{{ addPdp }}">Ajouter au panier</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANIER -->
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#605d5d">04 — Panier</span>
+      <div data-screen-label="Panier" style="width:390px;height:844px;display:flex;flex-direction:column;background:var(--color-bg);border:2px solid var(--color-divider);overflow:hidden">
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:2px solid var(--color-divider);flex:none">
+          <h4 style="margin:0;margin-right:auto;font-size:20px">Panier</h4>
+          <span class="text-muted" style="font-size:13px">{{ cartCount }} article(s)</span>
+        </div>
+
+        <div class="lbc-scroll" style="flex:1;overflow-y:auto">
+          <sc-for list="{{ cartLines }}" as="l" hint-placeholder-count="3">
+            <div style="display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--color-divider)">
+              <div class="grayscale" style="width:64px;height:64px;flex:none;overflow:hidden;background:var(--color-neutral-300)"><img src="{{ l.img }}" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;gap:8px">
+                  <div style="flex:1">
+                    <div style="font-family:var(--font-heading);font-weight:800;font-size:14px;line-height:1.2">{{ l.name }}</div>
+                    <div class="text-muted" style="font-size:11px">{{ l.unitLabel }}</div>
+                  </div>
+                  <div style="font-family:var(--font-heading);font-weight:800;font-size:14px">{{ l.lineTotal }}</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div style="display:flex;border:1px solid var(--color-divider)">
+                    <button style="width:32px;height:32px;border:0;background:transparent;cursor:pointer;font-family:var(--font-heading);font-size:16px" onClick="{{ l.dec }}">–</button>
+                    <div style="width:36px;display:grid;place-items:center;font-family:var(--font-heading);font-weight:800;font-size:14px;border-left:1px solid var(--color-divider);border-right:1px solid var(--color-divider)">{{ l.qty }}</div>
+                    <button style="width:32px;height:32px;border:0;background:transparent;cursor:pointer;font-family:var(--font-heading);font-size:16px" onClick="{{ l.inc }}">+</button>
+                  </div>
+                  <button class="btn btn-ghost" style="font-size:12px;gap:5px" onClick="{{ l.remove }}"><i class="ti ti-trash" style="font-size:15px"></i>Retirer</button>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+
+          <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:40px 16px;text-align:left">
+              <div style="font-family:var(--font-heading);font-weight:800;font-size:18px;margin-bottom:6px">Votre panier est vide</div>
+              <p class="text-muted" style="margin:0;font-size:13px">Ajoutez du bois depuis la boutique.</p>
+            </div>
+          </sc-if>
+
+          <div style="padding:16px;border-bottom:2px solid var(--color-divider);background:var(--color-surface);display:flex;flex-direction:column;gap:10px">
+            <div style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#605d5d">Livraison</div>
+            <div style="font-size:13px">Steinbourg + 100 km · créneau 48/72 h</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <sc-for list="{{ deliveryOptions }}" as="d" hint-placeholder-count="2">
+                <button style="display:flex;gap:10px;align-items:baseline;text-align:left;cursor:pointer;padding:11px 12px;background:{{ d.bg }};color:{{ d.fg }};border:1px solid var(--color-divider);font-family:var(--font-body)" onClick="{{ d.onClick }}">
+                  <span style="font-family:var(--font-heading);font-weight:800;font-size:13px;flex:1">{{ d.label }}</span>
+                  <span style="font-size:13px">{{ d.price }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="padding:16px">
+            <table class="table">
+              <tbody>
+                <sc-for list="{{ totals }}" as="t" hint-placeholder-count="3">
+                  <tr>
+                    <td class="text-muted">{{ t.k }}</td>
+                    <td style="text-align:right">{{ t.v }}</td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div style="flex:none;border-top:2px solid var(--color-divider);padding:12px 16px;display:flex;gap:12px;align-items:center">
+          <div style="margin-right:auto">
+            <div class="text-muted" style="font-size:11px">Total TTC</div>
+            <div style="font-family:var(--font-heading);font-weight:800;font-size:20px">{{ grandTotal }}</div>
+          </div>
+          <button class="btn btn-primary" style="padding:14px 18px;font-size:15px">Commander</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- À PROPOS -->
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#605d5d">05 — Notre bois</span>
+      <div data-screen-label="Notre bois" style="width:390px;height:844px;display:flex;flex-direction:column;background:var(--color-bg);border:2px solid var(--color-divider);overflow:hidden">
+        <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:2px solid var(--color-divider);flex:none">
+          <h4 style="margin:0;font-size:20px">Notre bois</h4>
+        </div>
+        <div class="lbc-scroll" style="flex:1;overflow-y:auto">
+          <div class="grayscale" style="height:230px;overflow:hidden">
+            <img src="https://images.unsplash.com/photo-1672984581785-60e0ff402fd4?auto=format&amp;fit=crop&amp;q=70&amp;w=780&amp;h=460" alt="Hangar de séchage du bois" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div style="padding:18px 16px;display:flex;flex-direction:column;gap:12px;border-bottom:2px solid var(--color-divider)">
+            <h2 style="margin:0;font-size:26px;line-height:1.06">Trois générations, une seule forêt.</h2>
+            <p style="margin:0;font-size:14px">Nous coupons, fendons et séchons nous-mêmes. Pas d'intermédiaire, pas de bois d'importation : le chêne que vous brûlez ce soir a poussé à vingt minutes de notre hangar.</p>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--color-divider)">
+            <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+              <div style="padding:16px;border-right:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)">
+                <div style="font-family:var(--font-heading);font-weight:800;font-size:28px;line-height:1">{{ s.n }}</div>
+                <div class="text-muted" style="font-size:11px;margin-top:4px">{{ s.l }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="padding:18px 16px;border-bottom:2px solid var(--color-divider)">
+            <h3 style="margin:0 0 14px;font-size:20px">De la coupe à votre bûcher</h3>
+            <div style="display:flex;flex-direction:column;gap:0">
+              <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+                <div style="display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--color-divider)">
+                  <span style="font-family:var(--font-heading);font-weight:800;font-size:12px;color:var(--color-accent);flex:none;width:22px">{{ st.n }}</span>
+                  <div>
+                    <div style="font-family:var(--font-heading);font-weight:800;font-size:14px">{{ st.t }}</div>
+                    <div class="text-muted" style="font-size:12px">{{ st.b }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:18px 16px;display:flex;flex-direction:column;gap:10px">
+            <div style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#605d5d">Certifications</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <span class="tag tag-outline">NF Bois de chauffage</span>
+              <span class="tag tag-outline">PEFC</span>
+              <span class="tag tag-outline">DIN+ granulés</span>
+            </div>
+            <p class="text-muted" style="margin:8px 0 0;font-size:12px">Taux d'humidité contrôlé à l'hygromètre sur chaque lot avant chargement. Le relevé est joint au bon de livraison.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#605d5d">06 — Contact &amp; devis</span>
+      <div data-screen-label="Contact" style="width:390px;height:844px;display:flex;flex-direction:column;background:var(--color-bg);border:2px solid var(--color-divider);overflow:hidden">
+        <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:2px solid var(--color-divider);flex:none">
+          <h4 style="margin:0;font-size:20px">Nous écrire</h4>
+        </div>
+        <div class="lbc-scroll" style="flex:1;overflow-y:auto">
+          <div style="padding:18px 16px;border-bottom:2px solid var(--color-divider);display:flex;flex-direction:column;gap:10px">
+            <p style="margin:0;font-size:14px">Un gros volume, une pizzeria à approvisionner, un accès compliqué ? Écrivez-nous, nous répondons sous 24 h ouvrées.</p>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div style="font-family:var(--font-heading);font-weight:800;font-size:20px">03 88 00 00 00</div>
+              <div class="text-muted" style="font-size:12px">lun–sam · 8h–18h · Steinbourg &amp; dépôt Paris</div>
+            </div>
+          </div>
+          <div style="padding:18px 16px;display:flex;flex-direction:column;gap:14px">
+            <div class="field">
+              <label>Nom</label>
+              <input class="input" type="text" placeholder="Marie Schmitt">
+            </div>
+            <div class="field">
+              <label>Code postal de livraison</label>
+              <input class="input" type="text" placeholder="67700">
+            </div>
+            <div class="field">
+              <label>Téléphone</label>
+              <input class="input" type="tel" placeholder="06 00 00 00 00">
+            </div>
+            <div class="field">
+              <label>Ce dont vous avez besoin</label>
+              <textarea class="input" placeholder="6 stères de chêne 50 cm, accès par chemin étroit…"></textarea>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#605d5d">Je suis</span>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <label class="radio"><input type="radio" name="lbc-profil" checked><span class="dot"></span>Particulier</label>
+                <label class="radio"><input type="radio" name="lbc-profil"><span class="dot"></span>Résidence secondaire</label>
+                <label class="radio"><input type="radio" name="lbc-profil"><span class="dot"></span>Restaurant / pizzeria</label>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-block" style="padding:14px 16px;font-size:15px">Envoyer ma demande</button>
+            <p class="text-muted" style="margin:0;font-size:11px">Devis gratuit, sans engagement. Vos coordonnées ne servent qu'à vous répondre.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:2600,&quot;height&quot;:1100}}">
+const EUR = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 });
+const PRODUCTS = [
+  { id: 'chene33', img: 'https://images.unsplash.com/photo-1422246719650-cb30d19825e3?auto=format&fit=crop&q=70&w=640&h=640', name: 'Bûches de chêne 33 cm', cat: 'Bûches', essence: 'Chêne', len: '33 cm', spec: 'Sec < 20 % · 1 stère · densité forte', price: 89, unit: 'stère' },
+  { id: 'chene50', img: 'https://images.unsplash.com/photo-1633491774171-2bf91b7033b1?auto=format&fit=crop&q=70&w=640&h=640', name: 'Bûches de chêne 50 cm', cat: 'Bûches', essence: 'Chêne', len: '50 cm', spec: 'Sec < 20 % · 1 stère · grands foyers', price: 82, unit: 'stère' },
+  { id: 'hetre33', img: 'https://images.unsplash.com/photo-1759790475933-ec8f2d02fc65?auto=format&fit=crop&q=70&w=640&h=640', name: 'Bûches de hêtre 33 cm', cat: 'Bûches', essence: 'Hêtre', len: '33 cm', spec: 'Sec < 20 % · flamme vive, peu de cendres', price: 95, unit: 'stère' },
+  { id: 'charme50', img: 'https://images.unsplash.com/photo-1672984581785-60e0ff402fd4?auto=format&fit=crop&q=70&w=640&h=640', name: 'Bûches de charme 50 cm', cat: 'Bûches', essence: 'Charme', len: '50 cm', spec: 'Sec < 20 % · braises longues', price: 87, unit: 'stère' },
+  { id: 'compressees', img: 'https://images.unsplash.com/photo-1576791606138-89367074a68f?auto=format&fit=crop&q=70&w=640&h=640', name: 'Bûches compressées', cat: 'Compressé', essence: 'Mélange', len: '25 cm', spec: 'Palette 96 bûches · nuit + jour', price: 349, unit: 'palette' },
+  { id: 'granules', img: 'https://images.unsplash.com/photo-1759790475933-ec8f2d02fc65?auto=format&fit=crop&q=70&w=640&h=640', name: 'Granulés premium DIN+', cat: 'Granulés', essence: 'Résineux', len: '—', spec: 'Palette 65 sacs de 15 kg', price: 379, unit: 'palette' },
+  { id: 'allumage', img: 'https://images.unsplash.com/photo-1633491774171-2bf91b7033b1?auto=format&fit=crop&q=70&w=640&h=640', name: "Petit bois d'allumage", cat: 'Allumage', essence: 'Résineux', len: '—', spec: 'Sac 20 L · résineux sec', price: 9.5, unit: 'sac' },
+  { id: 'charbon', img: 'https://images.unsplash.com/photo-1422246719650-cb30d19825e3?auto=format&fit=crop&q=70&w=640&h=640', name: 'Charbon de bois artisanal', cat: 'Allumage', essence: 'Mélange', len: '—', spec: 'Sac 10 kg · cuisson lente', price: 24, unit: 'sac' },
+  { id: 'pizzeria', img: 'https://images.unsplash.com/photo-1672984581785-60e0ff402fd4?auto=format&fit=crop&q=70&w=640&h=640', name: 'Bois de cuisson pizzeria', cat: 'Pro', essence: 'Hêtre', len: '33 cm', spec: 'Hêtre calibré · palette 1 m³', price: 189, unit: 'palette' },
+];
+const CATS = ['Tout', 'Bûches', 'Compressé', 'Granulés', 'Allumage', 'Pro'];
+const ESSENCES = ['Chêne', 'Hêtre', 'Charme', 'Résineux', 'Mélange'];
+const LENGTHS_F = ['33 cm', '50 cm', '25 cm'];
+const SORTS = [
+  { id: 'pop', label: 'Les plus commandés' },
+  { id: 'asc', label: 'Prix croissant' },
+  { id: 'desc', label: 'Prix décroissant' },
+];
+const MENU = [
+  { icon: 'ti-flame', label: 'Boutique', note: '9 références' },
+  { icon: 'ti-trees', label: 'Notre bois', note: 'Origine & séchage' },
+  { icon: 'ti-truck-delivery', label: 'Livraison & zones', note: 'Steinbourg · Paris' },
+  { icon: 'ti-calculator', label: 'Calculer mon volume', note: 'Combien de stères ?' },
+  { icon: 'ti-file-invoice', label: 'Devis pro & pizzeria', note: 'Réponse sous 24 h' },
+  { icon: 'ti-user-circle', label: 'Mon compte', note: 'Commandes & factures' },
+];
+const DELIVERY = [
+  { id: 'vrac', label: 'Déchargement en vrac', price: 0 },
+  { id: 'range', label: 'Livré rangé sur palette', price: 29 },
+];
+
+class Component extends DCLogic {
+  state = {
+    cat: 'Tout',
+    qty: 3,
+    len: '33 cm',
+    delivery: 'vrac',
+    menuOpen: false,
+    filterOpen: true,
+    fEssences: [],
+    fLengths: [],
+    sort: 'pop',
+    cart: [
+      { id: 'chene33', img: 'https://images.unsplash.com/photo-1422246719650-cb30d19825e3?auto=format&fit=crop&q=70&w=640&h=640', qty: 3 },
+      { id: 'allumage', img: 'https://images.unsplash.com/photo-1633491774171-2bf91b7033b1?auto=format&fit=crop&q=70&w=640&h=640', qty: 2 },
+    ],
+  };
+
+  unitPrice(base, q) {
+    if (q >= 5) return base - 10;
+    if (q >= 3) return base - 5;
+    return base;
+  }
+
+  addToCart(id, q) {
+    this.setState(s => {
+      const cart = s.cart.map(l => ({ ...l }));
+      const hit = cart.find(l => l.id === id);
+      if (hit) hit.qty += q; else cart.push({ id, qty: q });
+      return { cart };
+    });
+  }
+
+  bump(id, d) {
+    this.setState(s => ({
+      cart: s.cart
+        .map(l => (l.id === id ? { ...l, qty: Math.max(0, l.qty + d) } : l))
+        .filter(l => l.qty > 0),
+    }));
+  }
+
+  toggleIn(key, value) {
+    this.setState(s => {
+      const list = s[key].includes(value) ? s[key].filter(v => v !== value) : s[key].concat([value]);
+      return { [key]: list };
+    });
+  }
+
+  renderVals() {
+    const { cat, qty, len, delivery, cart, menuOpen, filterOpen, fEssences, fLengths, sort } = this.state;
+    const pdp = PRODUCTS[0];
+    const pdpUnit = this.unitPrice(pdp.price, qty);
+
+    const lines = cart.map(l => {
+      const p = PRODUCTS.find(x => x.id === l.id) || PRODUCTS[0];
+      const u = p.unit === 'stère' ? this.unitPrice(p.price, l.qty) : p.price;
+      return {
+        img: p.img,
+        name: p.name,
+        qty: l.qty,
+        unitLabel: EUR.format(u) + ' / ' + p.unit,
+        lineTotal: EUR.format(u * l.qty),
+        inc: () => this.bump(l.id, 1),
+        dec: () => this.bump(l.id, -1),
+        remove: () => this.setState(s => ({ cart: s.cart.filter(x => x.id !== l.id) })),
+      };
+    });
+
+    const subtotal = cart.reduce((sum, l) => {
+      const p = PRODUCTS.find(x => x.id === l.id) || PRODUCTS[0];
+      const u = p.unit === 'stère' ? this.unitPrice(p.price, l.qty) : p.price;
+      return sum + u * l.qty;
+    }, 0);
+    const savings = cart.reduce((sum, l) => {
+      const p = PRODUCTS.find(x => x.id === l.id) || PRODUCTS[0];
+      if (p.unit !== 'stère') return sum;
+      return sum + (p.price - this.unitPrice(p.price, l.qty)) * l.qty;
+    }, 0);
+    const delCost = (DELIVERY.find(d => d.id === delivery) || DELIVERY[0]).price;
+
+    let visible = PRODUCTS
+      .filter(p => cat === 'Tout' || p.cat === cat)
+      .filter(p => fEssences.length === 0 || fEssences.includes(p.essence))
+      .filter(p => fLengths.length === 0 || fLengths.includes(p.len));
+    if (sort === 'asc') visible = visible.slice().sort((a, b) => a.price - b.price);
+    if (sort === 'desc') visible = visible.slice().sort((a, b) => b.price - a.price);
+    const filterCount = fEssences.length + fLengths.length + (sort === 'pop' ? 0 : 1);
+
+    return {
+      cartCount: cart.reduce((n, l) => n + l.qty, 0),
+      cartEmpty: cart.length === 0,
+
+      menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      menuItems: MENU,
+
+      filterOpen,
+      openFilter: () => this.setState({ filterOpen: true }),
+      closeFilter: () => this.setState({ filterOpen: false }),
+      filterCount,
+      filterBadge: filterCount > 0,
+      filterLabel: filterCount > 0 ? 'Filtres · ' + filterCount : 'Filtres',
+      resetFilters: () => this.setState({ fEssences: [], fLengths: [], sort: 'pop' }),
+      essenceOptions: ESSENCES.map(e => ({
+        label: e,
+        count: PRODUCTS.filter(p => p.essence === e).length,
+        icon: fEssences.includes(e) ? 'ti-square-check-filled' : 'ti-square',
+        fg: fEssences.includes(e) ? 'var(--color-accent)' : 'var(--color-neutral-600)',
+        onClick: () => this.toggleIn('fEssences', e),
+      })),
+      lengthOptions: LENGTHS_F.map(l => ({
+        label: l,
+        bg: fLengths.includes(l) ? 'var(--color-accent)' : 'transparent',
+        fg: fLengths.includes(l) ? 'var(--color-bg)' : 'var(--color-text)',
+        onClick: () => this.toggleIn('fLengths', l),
+      })),
+      sortOptions: SORTS.map(s => ({
+        label: s.label,
+        icon: s.id === sort ? 'ti-circle-check-filled' : 'ti-circle',
+        fg: s.id === sort ? 'var(--color-accent)' : 'var(--color-neutral-600)',
+        onClick: () => this.setState({ sort: s.id }),
+      })),
+      applyLabel: 'Voir ' + visible.length + (visible.length === 1 ? ' produit' : ' produits'),
+
+      promises: [
+        { num: '01', title: 'Bois sec garanti < 20 %', body: 'Hygromètre sur chaque lot, relevé joint à la livraison.' },
+        { num: '02', title: 'Livré en 48/72 h', body: 'Créneau de 2 h confirmé la veille par SMS.' },
+        { num: '03', title: 'Origine locale, forêt gérée', body: 'Coupé à moins de 100 km, certifié PEFC.' },
+        { num: '04', title: 'Prix dégressif au volume', body: 'Jusqu\u2019à 10 € de moins par stère dès 5 stères.' },
+        { num: '05', title: 'Certifié NF Bois de chauffage', body: 'Volumes réels contrôlés, pas de stère approximatif.' },
+      ],
+      featured: PRODUCTS.slice(0, 4).map(p => ({
+        img: p.img,
+        name: p.name,
+        spec: p.spec,
+        priceLabel: EUR.format(p.price) + ' / ' + p.unit,
+      })),
+      reviews: [
+        { quote: '« Bois vraiment sec, il prend du premier coup. Livraison pile dans le créneau annoncé. »', author: 'Céline B. — Saverne' },
+        { quote: '« On tourne au hêtre de Lux Bois pour le four à pizza depuis deux ans. Régulier, calibré. »', author: 'Trattoria Da Marco — Strasbourg' },
+      ],
+
+      categories: CATS.map(c => ({
+        label: c,
+        cls: c === cat ? 'tag tag-accent' : 'tag tag-outline',
+        onClick: () => this.setState({ cat: c }),
+      })),
+      visibleProducts: visible.map(p => ({
+        img: p.img,
+        name: p.name,
+        spec: p.spec,
+        priceLabel: EUR.format(p.price) + ' / ' + p.unit,
+        add: () => this.addToCart(p.id, 1),
+      })),
+      resultCount: visible.length + (visible.length === 1 ? ' produit' : ' produits'),
+
+      lengths: ['33 cm', '50 cm', '1 m'].map(l => ({
+        label: l,
+        bg: l === len ? 'var(--color-accent)' : 'transparent',
+        fg: l === len ? 'var(--color-bg)' : 'var(--color-text)',
+        onClick: () => this.setState({ len: l }),
+      })),
+      qty,
+      incQty: () => this.setState(s => ({ qty: s.qty + 1 })),
+      decQty: () => this.setState(s => ({ qty: Math.max(1, s.qty - 1) })),
+      pdpUnitPrice: EUR.format(pdpUnit),
+      pdpTotal: EUR.format(pdpUnit * qty),
+      discountNote: qty >= 5
+        ? 'Remise volume appliquée : −10 €/stère.'
+        : qty >= 3
+          ? 'Remise volume appliquée : −5 €/stère. À partir de 5 stères : −10 €/stère.'
+          : 'À partir de 3 stères : −5 €/stère.',
+      specs: [
+        { k: 'Essence', v: 'Chêne' },
+        { k: 'Humidité', v: '< 20 %' },
+        { k: 'Longueur', v: len },
+        { k: 'Séchage', v: '24 mois sous hangar' },
+        { k: 'Volume', v: '1 stère = 1 m³ apparent' },
+      ],
+      addPdp: () => this.addToCart(pdp.id, qty),
+
+      cartLines: lines,
+      deliveryOptions: DELIVERY.map(d => ({
+        label: d.label,
+        price: d.price === 0 ? 'Inclus' : '+ ' + EUR.format(d.price),
+        bg: d.id === delivery ? 'var(--color-accent-100)' : 'transparent',
+        fg: 'var(--color-text)',
+        onClick: () => this.setState({ delivery: d.id }),
+      })),
+      totals: [
+        { k: 'Sous-total', v: EUR.format(subtotal) },
+        { k: 'Remise volume', v: savings > 0 ? '− ' + EUR.format(savings) : '—' },
+        { k: 'Livraison', v: delCost === 0 ? 'Incluse' : EUR.format(delCost) },
+      ],
+      grandTotal: EUR.format(subtotal + delCost),
+    };
+  }
+}
+</script>
+</body>
+</html>
