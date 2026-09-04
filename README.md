@@ -1,25 +1,70 @@
-# CODING AGENTS: READ THIS FIRST
+# Lux Bois Chauffage
 
-This is a **handoff bundle** from Claude Design (claude.ai/design).
+Site e-commerce pour la vente de bois de chauffage — Next.js 16 (App Router),
+Tailwind CSS v4, Tabler Icons. Design "Modernist" (rouge/ivoire, Archivo,
+angles droits) issu de l'export Claude Design dans `design/`.
 
-A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported this bundle so a coding agent can implement the designs for real.
+## Démarrer
 
-## What you should do — IMPORTANT
+```bash
+npm install
+npm run dev
+```
 
-**Read the chat transcripts first.** There are 1 chat transcript(s) in `chats/`. The transcripts show the full back-and-forth between the user and the design assistant — they tell you **what the user actually wants** and **where they landed** after iterating. Don't skip them. The final HTML files are the output, but the chat is where the intent lives.
+Le site tourne sur [http://localhost:3000](http://localhost:3000). Tant que
+Shopify n'est pas branché, les pages utilisent le catalogue factice
+(`src/lib/products.ts`) avec les photos Unsplash du design.
 
-**Read `project/LUX BOIS CHAUFFAGE.dc.html` in full.** The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+## Connecter Shopify
 
-**If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
+Le site bascule automatiquement sur le catalogue Shopify dès que ces deux
+variables sont renseignées dans `.env.local` (copier `.env.local.example`) :
 
-## About the design files
+```
+SHOPIFY_STORE_DOMAIN=ton-nom-de-boutique.myshopify.com
+SHOPIFY_STOREFRONT_API_TOKEN=...
+```
 
-The design medium is **HTML/CSS/JS** — these are prototypes, not production code. Your job is to **recreate them pixel-perfectly** in whatever technology makes sense for the target codebase (React, Vue, native, whatever fits). Match the visual output; don't copy the prototype's internal structure unless it happens to fit.
+Pour générer le token :
 
-**Don't render these files in a browser or take screenshots unless the user asks you to.** Everything you need — dimensions, colors, layout rules — is spelled out in the source. Read the HTML and CSS directly; a screenshot won't tell you anything they don't.
+1. Admin Shopify → **Réglages → Apps et canaux de vente → Développer des apps**
+2. **Créer une app**
+3. Onglet **Configuration** → **Storefront API** → cocher `unauthenticated_read_product_listings`,
+   `unauthenticated_read_product_inventory`, `unauthenticated_read_checkouts`,
+   `unauthenticated_write_checkouts` (ou `..._carts` selon la version)
+4. Onglet **Identifiants API** → **Installer l'app**
+5. Copier le **Storefront API access token** dans `.env.local`
 
-## Bundle contents
+### Convention de tags produit
 
-- `README.md` — this file
-- `chats/` — conversation transcripts (read these!)
-- `project/` — the `Lux Bois Chauffage Design` project files (HTML prototypes, assets, components)
+Une fois Shopify branché, la fiche produit (essence, longueur, unité de
+vente) est lue depuis les tags Shopify du produit :
+
+| Tag                | Effet                                      |
+| ------------------ | ------------------------------------------ |
+| `essence:chene`     | Essence affichée : "chene"                 |
+| `longueur:33 cm`    | Longueur affichée                          |
+| `unite:palette`     | Unité de vente (`stère` par défaut, ou `palette` / `sac`) |
+
+Sans ces tags, le produit reste affiché mais sans ces informations.
+
+### Paiement
+
+Le bouton **Commander** du panier crée un panier Shopify réel (Storefront
+API `cartCreate`) et redirige vers le checkout hébergé Shopify — aucune
+donnée de paiement ne transite par ce site. Tant que Shopify n'est pas
+configuré, un message l'indique au lieu de rediriger.
+
+L'option de livraison "rangé sur palette" (+29 €) peut être ajoutée comme
+vraie ligne de commande en créant ce produit dans Shopify et en renseignant
+son ID de variante dans `SHOPIFY_DELIVERY_RANGE_VARIANT_ID`.
+
+## Structure
+
+```
+src/app/            pages (accueil, boutique, produit/[slug], panier, notre-bois, contact)
+src/components/      header, menu, footer, fiche produit, UI (bouton, tag, champ)
+src/context/         panier (localStorage, côté client)
+src/lib/             types, catalogue mock, calcul des prix dégressifs, client Shopify
+design/              export Claude Design d'origine (référence, non utilisé par l'app)
+```
