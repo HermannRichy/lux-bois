@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, AnchorHTMLAttributes, ReactNode } from "reac
 import Link from "next/link";
 
 const BASE =
-  "inline-flex items-center justify-center gap-1.5 font-heading font-extrabold text-sm leading-tight cursor-pointer transition-colors disabled:opacity-45 disabled:cursor-not-allowed";
+  "inline-flex items-center justify-center gap-1.5 font-heading font-extrabold text-sm leading-tight cursor-pointer transition-[color,background-color,transform] duration-150 active:scale-[0.97] disabled:opacity-45 disabled:cursor-not-allowed";
 
 const VARIANTS = {
   primary: "bg-accent text-bg px-4 py-3 hover:bg-accent-600 active:bg-accent-700",

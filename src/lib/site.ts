@@ -1,0 +1,38 @@
+/**
+ * Source unique des informations de l'entreprise : contact, adresse, URL.
+ * Utilisée par le footer, la page contact, les métadonnées SEO et les pages légales.
+ */
+export const SITE = {
+  name: "Lux Bois Chauffage",
+  shortName: "Lux Bois",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://luxboischauffage.com",
+  tagline: "Bois de chauffage livré en Alsace",
+  description:
+    "Bûches, granulés et bois de cuisson séchés 24 mois, livrés en 48/72 h autour de Steinbourg et à Paris.",
+  phone: "06 38 88 40 61",
+  phoneHref: "tel:+33638884061",
+  phoneIntl: "+33638884061",
+  email: "contact@luxboischauffage.com",
+  hours: "lun–sam · 8h–18h",
+  address: {
+    street: "12 route de la Forêt",
+    postalCode: "67790",
+    city: "Steinbourg",
+    country: "France",
+  },
+  // À compléter avec les informations d'immatriculation avant mise en ligne.
+  legal: {
+    companyName: "Lux Bois Chauffage",
+    legalForm: "[forme juridique à compléter]",
+    siret: "[SIRET à compléter]",
+    vatNumber: "[n° de TVA intracommunautaire à compléter]",
+    publicationDirector: "[nom du responsable de publication à compléter]",
+  },
+  host: {
+    name: "[hébergeur à compléter]",
+    address: "[adresse de l'hébergeur à compléter]",
+  },
+  lastUpdate: "14 octobre 2026",
+} as const;
+
+export const FULL_ADDRESS = `${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city}`;

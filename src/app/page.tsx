@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getProducts } from "@/lib/catalog";
 import { EUR } from "@/lib/pricing";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/reveal";
 
 const PROMISES = [
   {
@@ -85,9 +86,10 @@ export default async function HomePage() {
 
       <section className="border-b-2 border-divider md:max-w-6xl md:mx-auto">
         <div className="md:grid md:grid-cols-5">
-          {PROMISES.map((p) => (
-            <div
+          {PROMISES.map((p, i) => (
+            <Reveal
               key={p.num}
+              delay={i * 70}
               className="flex gap-3 items-baseline px-4 md:px-4 py-3.5 border-b md:border-b-0 md:border-r last:border-r-0 border-divider"
             >
               <span className="font-mono text-[10px] text-accent shrink-0 w-5">
@@ -97,12 +99,12 @@ export default async function HomePage() {
                 <div className="font-heading font-extrabold text-sm">{p.title}</div>
                 <div className="text-xs text-text/55">{p.body}</div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="px-4 md:px-8 py-5 md:py-10 border-b-2 border-divider md:max-w-6xl md:mx-auto">
+      <Reveal as="section" className="px-4 md:px-8 py-5 md:py-10 border-b-2 border-divider md:max-w-6xl md:mx-auto">
         <div className="flex items-baseline justify-between mb-3.5">
           <h3 className="text-[22px] md:text-3xl">Nos bois</h3>
           <Link href="/boutique" className="text-[13px] text-accent hover:underline">
@@ -114,10 +116,10 @@ export default async function HomePage() {
             <Link
               key={p.id}
               href={`/produit/${p.slug}`}
-              className="flex flex-col bg-surface hover:opacity-90"
+              className="group flex flex-col bg-surface transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--color-text)]"
             >
               <div className="h-[104px] md:h-40 overflow-hidden bg-neutral-300 grayscale-photo relative">
-                <Image src={p.img} alt="" fill sizes="25vw" className="object-cover" />
+                <Image src={p.img} alt="" fill sizes="25vw" className="object-cover transition-transform duration-500 group-hover:scale-110" />
               </div>
               <div className="p-2.5 flex flex-col gap-1.5 flex-1">
                 <div className="font-heading font-extrabold text-[13px] leading-tight">
@@ -131,7 +133,7 @@ export default async function HomePage() {
             </Link>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       <section id="livraison" className="bg-accent text-bg px-4 md:px-8 py-6 md:py-12 flex flex-col gap-2.5">
         <div className="md:max-w-6xl md:mx-auto md:w-full flex flex-col gap-2.5">
@@ -147,7 +149,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="px-4 md:px-8 py-5 md:py-10 border-b-2 border-divider md:max-w-6xl md:mx-auto">
+      <Reveal as="section" className="px-4 md:px-8 py-5 md:py-10 border-b-2 border-divider md:max-w-6xl md:mx-auto">
         <h3 className="text-[22px] md:text-3xl mb-3">Ils se chauffent chez nous</h3>
         <div className="flex flex-col md:flex-row gap-3 md:gap-6">
           {REVIEWS.map((r) => (
@@ -157,7 +159,7 @@ export default async function HomePage() {
             </div>
           ))}
         </div>
-      </section>
+      </Reveal>
     </>
   );
 }
