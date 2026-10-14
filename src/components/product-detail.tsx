@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { IconArrowLeft, IconCheck, IconHeart, IconShoppingCart } from "@tabler/icons-react";
+import { IconArrowLeft, IconCheck, IconShoppingCart } from "@tabler/icons-react";
 import type { Product } from "@/lib/types";
 import { EUR } from "@/lib/pricing";
 import { unitPrice, discountNote } from "@/lib/pricing";
@@ -39,9 +39,6 @@ export function ProductDetail({ product }: { product: Product }) {
           <IconArrowLeft size={20} />
         </Button>
         <span className="text-[13px] mr-auto">{product.category}</span>
-        <Button variant="secondary" className="!px-0 w-11 h-11" aria-label="Favori">
-          <IconHeart size={20} />
-        </Button>
         <Button href="/panier" variant="secondary" className="relative !px-0 w-11 h-11" aria-label="Panier">
           <IconShoppingCart size={20} />
           {count > 0 && (

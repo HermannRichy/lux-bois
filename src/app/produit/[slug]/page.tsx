@@ -38,5 +38,33 @@ export default async function ProductPage({
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) notFound();
-  return <ProductDetail product={product} />;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: product.img,
+    sku: product.id,
+    category: product.category,
+    brand: { "@type": "Brand", name: SITE.name },
+    offers: {
+      "@type": "Offer",
+      url: `${SITE.url}/produit/${product.slug}`,
+      priceCurrency: "EUR",
+      price: product.price.toFixed(2),
+      itemCondition: "https://schema.org/NewCondition",
+      availability: "https://schema.org/InStock",
+      seller: { "@type": "Organization", name: SITE.name },
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
+      <ProductDetail product={product} />
+    </>
+  );
 }

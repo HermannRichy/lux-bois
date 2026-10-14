@@ -215,7 +215,6 @@ export const MENU_ITEMS = [
   { icon: "truckDelivery", label: "Livraison & zones", note: "Steinbourg · Paris", href: "/#livraison" },
   { icon: "calculator", label: "Calculer mon volume", note: "Combien de stères ?", href: "/#livraison" },
   { icon: "fileInvoice", label: "Devis pro & pizzeria", note: "Réponse sous 24 h", href: "/contact" },
-  { icon: "userCircle", label: "Mon compte", note: "Commandes & factures", href: "/contact" },
 ] as const;
 
 export const DELIVERY_OPTIONS = [

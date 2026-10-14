@@ -10,7 +10,6 @@ import {
   IconTruckDelivery,
   IconCalculator,
   IconFileInvoice,
-  IconUserCircle,
 } from "@tabler/icons-react";
 import { MENU_ITEMS } from "@/lib/products";
 import { Button } from "@/components/ui/button";
@@ -22,7 +21,6 @@ const ICONS = {
   truckDelivery: IconTruckDelivery,
   calculator: IconCalculator,
   fileInvoice: IconFileInvoice,
-  userCircle: IconUserCircle,
 } as const;
 
 export function MobileMenu({ onClose }: { onClose: () => void }) {
