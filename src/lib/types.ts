@@ -1,4 +1,4 @@
-export type ProductCategory = "Bûches" | "Compressé" | "Granulés" | "Allumage" | "Pro";
+export type ProductCategory = string;
 
 export type ProductUnit = "stère" | "palette" | "sac";
 

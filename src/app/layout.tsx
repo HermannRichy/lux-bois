@@ -97,9 +97,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
+        <a
+          href="#contenu"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[70] focus:bg-accent focus:text-bg focus:px-4 focus:py-3 font-heading font-extrabold text-sm"
+        >
+          Aller au contenu
+        </a>
         <CartProvider>
           <SiteHeader />
-          <main className="flex-1">{children}</main>
+          <main id="contenu" tabIndex={-1} className="flex-1 focus:outline-none">
+            {children}
+          </main>
           <SiteFooter />
           <ContactFab />
           <CookieConsent />

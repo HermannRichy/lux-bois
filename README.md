@@ -11,14 +11,14 @@ npm install
 npm run dev
 ```
 
-Le site tourne sur [http://localhost:3000](http://localhost:3000). Tant que
-Shopify n'est pas branché, les pages utilisent le catalogue factice
-(`src/lib/products.ts`) avec les photos Unsplash du design.
+Le site tourne sur [http://localhost:3000](http://localhost:3000). Le catalogue
+est lu depuis Shopify : `.env.local` doit contenir les variables ci-dessous,
+sinon les pages boutique échouent (il n'y a plus de catalogue de démonstration).
 
 ## Connecter Shopify
 
-Le site bascule automatiquement sur le catalogue Shopify dès que ces deux
-variables sont renseignées dans `.env.local` (copier `.env.local.example`) :
+Le catalogue et le paiement passent par Shopify. Ces deux variables sont
+obligatoires dans `.env.local` (copier `.env.local.example`) :
 
 ```
 SHOPIFY_STORE_DOMAIN=ton-nom-de-boutique.myshopify.com
@@ -52,8 +52,8 @@ Sans ces tags, le produit reste affiché mais sans ces informations.
 
 Le bouton **Commander** du panier crée un panier Shopify réel (Storefront
 API `cartCreate`) et redirige vers le checkout hébergé Shopify — aucune
-donnée de paiement ne transite par ce site. Tant que Shopify n'est pas
-configuré, un message l'indique au lieu de rediriger.
+donnée de paiement ne transite par ce site. En cas d'échec, un message
+d'erreur s'affiche dans le panier.
 
 L'option de livraison "rangé sur palette" (+29 €) peut être ajoutée comme
 vraie ligne de commande en créant ce produit dans Shopify et en renseignant
@@ -65,6 +65,6 @@ son ID de variante dans `SHOPIFY_DELIVERY_RANGE_VARIANT_ID`.
 src/app/            pages (accueil, boutique, produit/[slug], panier, notre-bois, contact)
 src/components/      header, menu, footer, fiche produit, UI (bouton, tag, champ)
 src/context/         panier (localStorage, côté client)
-src/lib/             types, catalogue mock, calcul des prix dégressifs, client Shopify
+src/lib/             types, calcul des prix dégressifs, client Shopify et catalogue
 design/              export Claude Design d'origine (référence, non utilisé par l'app)
 ```

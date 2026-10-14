@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { IconArrowLeft, IconCheck, IconHeart, IconShoppingCart } from "@tabler/icons-react";
+import { IconArrowLeft, IconCheck, IconShoppingCart } from "@tabler/icons-react";
 import type { Product } from "@/lib/types";
 import { EUR } from "@/lib/pricing";
 import { unitPrice, discountNote } from "@/lib/pricing";
@@ -10,21 +10,14 @@ import { Tag } from "@/components/ui/tag";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/cart-context";
 
-const LENGTH_OPTIONS = ["33 cm", "50 cm", "1 m"];
-
 export function ProductDetail({ product }: { product: Product }) {
   const { add, count } = useCart();
   const [qty, setQty] = useState(1);
-  const [length, setLength] = useState(product.length !== "—" ? product.length : "33 cm");
   const [added, setAdded] = useState(false);
 
   const isStere = product.unit === "stère";
   const unit = isStere ? unitPrice(product, qty) : product.price;
   const total = unit * qty;
-
-  const specs = product.specs.map((s) =>
-    s.k === "Longueur" ? { ...s, v: length } : s
-  );
 
   const handleAdd = () => {
     add(product.id, qty);
@@ -39,9 +32,6 @@ export function ProductDetail({ product }: { product: Product }) {
           <IconArrowLeft size={20} />
         </Button>
         <span className="text-[13px] mr-auto">{product.category}</span>
-        <Button variant="secondary" className="!px-0 w-11 h-11" aria-label="Favori">
-          <IconHeart size={20} />
-        </Button>
         <Button href="/panier" variant="secondary" className="relative !px-0 w-11 h-11" aria-label="Panier">
           <IconShoppingCart size={20} />
           {count > 0 && (
@@ -85,27 +75,6 @@ export function ProductDetail({ product }: { product: Product }) {
           </div>
 
           <div className="px-4 md:px-0 py-4 md:py-6 flex flex-col gap-4 border-b-2 border-divider md:border-0">
-            {product.length !== "—" && (
-              <div>
-                <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-neutral-700 mb-1.5">
-                  Longueur
-                </div>
-                <div className="flex border border-divider w-fit">
-                  {LENGTH_OPTIONS.map((l) => (
-                    <button
-                      key={l}
-                      onClick={() => setLength(l)}
-                      className={`cursor-pointer text-[13px] px-3.5 py-2 border-0 border-l first:border-l-0 border-divider transition-colors ${
-                        l === length ? "bg-accent text-bg" : "bg-transparent text-text"
-                      }`}
-                    >
-                      {l}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
             <div>
               <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-neutral-700 mb-1.5">
                 Volume ({product.unit}s)
@@ -138,7 +107,7 @@ export function ProductDetail({ product }: { product: Product }) {
           <div className="px-4 md:px-0 py-4 md:py-6 border-b-2 border-divider md:border-0">
             <table className="w-full text-sm">
               <tbody>
-                {specs.map((s) => (
+                {product.specs.map((s) => (
                   <tr key={s.k}>
                     <td className="text-text/55 w-[46%] py-2 border-b border-divider">
                       {s.k}

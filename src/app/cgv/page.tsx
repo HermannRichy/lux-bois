@@ -19,8 +19,8 @@ export default function CgvPage() {
     >
       <LegalSection n={1} title="Vendeur">
         <p>
-          <strong>{legal.companyName}</strong>, {legal.legalForm}, SIRET {legal.siret}, TVA{" "}
-          {legal.vatNumber}. Scierie et siège : {FULL_ADDRESS}. Téléphone :{" "}
+          <strong>{legal.companyName}</strong>, {legal.legalForm.toLowerCase()} de{" "}
+          {legal.publicationDirector}. Scierie et siège : {FULL_ADDRESS}. Téléphone :{" "}
           <a href={SITE.phoneHref}>{SITE.phone}</a>. E-mail :{" "}
           <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
         </p>
@@ -163,8 +163,7 @@ export default function CgvPage() {
           En cas de litige, contactez d&apos;abord notre service client pour rechercher une
           solution amiable. Conformément aux articles L611-1 et suivants du Code de la
           consommation, le consommateur peut ensuite recourir gratuitement à un médiateur
-          de la consommation : [médiateur à compléter : nom et coordonnées]. Les conditions
-          présentes sont soumises au droit français.
+          de la consommation. Les présentes conditions sont soumises au droit français.
         </p>
       </LegalSection>
     </LegalPage>

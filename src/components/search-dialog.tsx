@@ -13,7 +13,6 @@ import {
   IconTruckDelivery,
   IconX,
 } from "@tabler/icons-react";
-import { PRODUCTS } from "@/lib/products";
 import { EUR } from "@/lib/pricing";
 import type { Product } from "@/lib/types";
 
@@ -56,7 +55,7 @@ export function SearchDialog({ onClose }: { onClose: () => void }) {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
-  const [products, setProducts] = useState<Product[]>(PRODUCTS);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(0);
 

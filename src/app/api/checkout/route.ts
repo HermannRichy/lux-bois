@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getProducts } from "@/lib/catalog";
-import { createShopifyCheckout, isShopifyConfigured } from "@/lib/shopify";
+import { createShopifyCheckout } from "@/lib/shopify";
 
 interface CheckoutBody {
   lines: { productId: string; qty: number }[];
@@ -8,10 +8,6 @@ interface CheckoutBody {
 }
 
 export async function POST(req: Request) {
-  if (!isShopifyConfigured()) {
-    return NextResponse.json({ checkoutUrl: null, reason: "not_configured" });
-  }
-
   const body = (await req.json()) as CheckoutBody;
   const products = await getProducts();
 
@@ -25,8 +21,7 @@ export async function POST(req: Request) {
     .filter((l): l is { variantId: string; quantity: number } => l !== null);
 
   if (cartLines.length === 0) {
-    // Catalog isn't sourced from Shopify yet (products have no variantId).
-    return NextResponse.json({ checkoutUrl: null, reason: "not_configured" });
+    return NextResponse.json({ checkoutUrl: null, reason: "empty_cart" }, { status: 400 });
   }
 
   // Optional: a real Shopify product/variant for the "rangé sur palette"
