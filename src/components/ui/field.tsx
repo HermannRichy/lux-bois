@@ -39,6 +39,7 @@ export function Radio({
       <input
         type="radio"
         name={name}
+        value={label}
         defaultChecked={defaultChecked}
         className="peer sr-only"
       />

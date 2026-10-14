@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -14,6 +14,7 @@ import {
   IconCircleCheckFilled,
   IconX,
   IconPlus,
+  IconCheck,
 } from "@tabler/icons-react";
 import {
   CATEGORIES,
@@ -34,6 +35,17 @@ export function BoutiqueClient({ products }: { products: Product[] }) {
   const [fLengths, setFLengths] = useState<string[]>([]);
   const [sort, setSort] = useState<SortId>("pop");
   const [filterOpen, setFilterOpen] = useState(false);
+  const [addedId, setAddedId] = useState<string | null>(null);
+  const addedTimer = useRef<number | undefined>(undefined);
+
+  useEffect(() => () => window.clearTimeout(addedTimer.current), []);
+
+  const handleAdd = (id: string) => {
+    add(id, 1);
+    setAddedId(id);
+    window.clearTimeout(addedTimer.current);
+    addedTimer.current = window.setTimeout(() => setAddedId(null), 1400);
+  };
 
   const toggle = (list: string[], value: string, setList: (v: string[]) => void) => {
     setList(list.includes(value) ? list.filter((v) => v !== value) : [...list, value]);
@@ -79,7 +91,7 @@ export function BoutiqueClient({ products }: { products: Product[] }) {
             <button
               key={c}
               onClick={() => setCat(c)}
-              className={`shrink-0 text-xs px-2.5 py-1.5 font-body cursor-pointer ${
+              className={`shrink-0 text-xs px-2.5 py-1.5 font-body cursor-pointer transition-all active:scale-95 ${
                 c === cat
                   ? "bg-accent-100 text-accent-800"
                   : "border border-accent text-accent"
@@ -122,13 +134,13 @@ export function BoutiqueClient({ products }: { products: Product[] }) {
             {visible.map((p) => (
               <div
                 key={p.id}
-                className="flex gap-3 px-3.5 md:px-0 py-3.5 border-b md:border border-divider"
+                className="group flex gap-3 px-3.5 md:px-0 py-3.5 border-b md:border border-divider transition-colors hover:bg-text/[0.03]"
               >
                 <Link
                   href={`/produit/${p.slug}`}
                   className="w-[92px] h-[92px] md:w-32 md:h-32 shrink-0 overflow-hidden bg-neutral-300 grayscale-photo relative"
                 >
-                  <Image src={p.img} alt="" fill sizes="130px" className="object-cover" />
+                  <Image src={p.img} alt="" fill sizes="130px" className="object-cover transition-transform duration-500 group-hover:scale-110" />
                 </Link>
                 <div className="flex flex-col gap-1 flex-1 min-w-0">
                   <Link
@@ -143,11 +155,23 @@ export function BoutiqueClient({ products }: { products: Product[] }) {
                       {EUR.format(p.price)} / {p.unit}
                     </div>
                     <Button
-                      className="px-3 py-2 gap-1.5"
-                      onClick={() => add(p.id, 1)}
+                      className={`px-3 py-2 gap-1.5 min-w-[104px] ${
+                        addedId === p.id ? "!bg-neutral-900" : ""
+                      }`}
+                      onClick={() => handleAdd(p.id)}
+                      aria-live="polite"
                     >
-                      <IconPlus size={15} />
-                      Ajouter
+                      {addedId === p.id ? (
+                        <>
+                          <IconCheck size={15} className="animate-check-in" />
+                          Ajouté
+                        </>
+                      ) : (
+                        <>
+                          <IconPlus size={15} />
+                          Ajouter
+                        </>
+                      )}
                     </Button>
                   </div>
                 </div>
@@ -173,13 +197,13 @@ export function BoutiqueClient({ products }: { products: Product[] }) {
       </div>
 
       {filterOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col justify-end bg-neutral-900/45 md:hidden">
+        <div className="fixed inset-0 z-50 flex flex-col justify-end bg-neutral-900/45 md:hidden animate-fade-in">
           <button
             className="flex-1 border-0 bg-transparent cursor-pointer"
             onClick={() => setFilterOpen(false)}
             aria-label="Fermer les filtres"
           />
-          <div className="bg-bg border-t-2 border-text flex flex-col max-h-[78%]">
+          <div className="bg-bg border-t-2 border-text flex flex-col max-h-[78%] animate-sheet-in">
             <div className="flex items-center gap-2.5 p-3.5 border-b-2 border-divider">
               <IconAdjustmentsHorizontal size={20} className="text-accent" />
               <span className="font-heading font-extrabold text-base mr-auto">

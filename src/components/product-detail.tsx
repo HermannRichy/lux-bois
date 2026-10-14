@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { IconArrowLeft, IconHeart, IconShoppingCart } from "@tabler/icons-react";
+import { IconArrowLeft, IconCheck, IconHeart, IconShoppingCart } from "@tabler/icons-react";
 import type { Product } from "@/lib/types";
 import { EUR } from "@/lib/pricing";
 import { unitPrice, discountNote } from "@/lib/pricing";
@@ -45,7 +45,7 @@ export function ProductDetail({ product }: { product: Product }) {
         <Button href="/panier" variant="secondary" className="relative !px-0 w-11 h-11" aria-label="Panier">
           <IconShoppingCart size={20} />
           {count > 0 && (
-            <span className="absolute -top-px -right-px font-heading font-extrabold text-[11px] bg-accent text-bg px-[5px] leading-4">
+            <span key={count} className="animate-pop absolute -top-px -right-px font-heading font-extrabold text-[11px] bg-accent text-bg px-[5px] leading-4">
               {count}
             </span>
           )}
@@ -95,7 +95,7 @@ export function ProductDetail({ product }: { product: Product }) {
                     <button
                       key={l}
                       onClick={() => setLength(l)}
-                      className={`cursor-pointer text-[13px] px-3.5 py-2 border-0 border-l first:border-l-0 border-divider ${
+                      className={`cursor-pointer text-[13px] px-3.5 py-2 border-0 border-l first:border-l-0 border-divider transition-colors ${
                         l === length ? "bg-accent text-bg" : "bg-transparent text-text"
                       }`}
                     >
@@ -113,16 +113,18 @@ export function ProductDetail({ product }: { product: Product }) {
               <div className="flex items-stretch border border-divider w-fit">
                 <button
                   onClick={() => setQty((q) => Math.max(1, q - 1))}
-                  className="w-[46px] h-[46px] border-0 bg-transparent cursor-pointer text-xl font-heading"
+                  className="w-[46px] h-[46px] border-0 bg-transparent cursor-pointer text-xl font-heading hover:bg-text/5 active:bg-text/10 active:scale-90 transition"
+                  aria-label="Diminuer la quantité"
                 >
                   –
                 </button>
                 <div className="w-14 grid place-items-center font-heading font-extrabold text-lg border-x border-divider">
-                  {qty}
+                  <span key={qty} className="animate-pop inline-block">{qty}</span>
                 </div>
                 <button
                   onClick={() => setQty((q) => q + 1)}
-                  className="w-[46px] h-[46px] border-0 bg-transparent cursor-pointer text-xl font-heading"
+                  className="w-[46px] h-[46px] border-0 bg-transparent cursor-pointer text-xl font-heading hover:bg-text/5 active:bg-text/10 active:scale-90 transition"
+                  aria-label="Augmenter la quantité"
                 >
                   +
                 </button>
@@ -159,12 +161,19 @@ export function ProductDetail({ product }: { product: Product }) {
           </div>
 
           <div className="hidden md:flex items-center gap-4 mt-2">
-            <Button className="px-6 py-4 text-base" onClick={handleAdd}>
-              {added ? "Ajouté ✓" : "Ajouter au panier"}
+            <Button className={`px-6 py-4 text-base ${added ? "!bg-neutral-900" : ""}`} onClick={handleAdd} aria-live="polite">
+              {added ? (
+                <>
+                  <IconCheck size={18} className="animate-check-in" />
+                  Ajouté
+                </>
+              ) : (
+                "Ajouter au panier"
+              )}
             </Button>
             <div>
               <div className="text-xs text-text/55">Total</div>
-              <div className="font-heading font-extrabold text-xl">{EUR.format(total)}</div>
+              <div key={total} className="animate-fade-in font-heading font-extrabold text-xl">{EUR.format(total)}</div>
             </div>
           </div>
         </div>
@@ -176,10 +185,17 @@ export function ProductDetail({ product }: { product: Product }) {
       <div className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t-2 border-divider px-4 py-3 flex gap-2.5 items-center bg-bg">
         <div className="mr-auto">
           <div className="text-[11px] text-text/55">Total</div>
-          <div className="font-heading font-extrabold text-lg">{EUR.format(total)}</div>
+          <div key={total} className="animate-fade-in font-heading font-extrabold text-lg">{EUR.format(total)}</div>
         </div>
-        <Button className="px-4.5 py-3.5 text-[15px]" onClick={handleAdd}>
-          {added ? "Ajouté ✓" : "Ajouter au panier"}
+        <Button className={`px-4.5 py-3.5 text-[15px] ${added ? "!bg-neutral-900" : ""}`} onClick={handleAdd} aria-live="polite">
+          {added ? (
+                <>
+                  <IconCheck size={18} className="animate-check-in" />
+                  Ajouté
+                </>
+              ) : (
+                "Ajouter au panier"
+              )}
         </Button>
       </div>
     </div>

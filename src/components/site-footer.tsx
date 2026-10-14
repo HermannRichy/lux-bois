@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { SITE, FULL_ADDRESS } from "@/lib/site";
+import { CookieSettingsButton } from "@/components/cookie-settings-button";
 import {
   IconMapPin,
   IconPhone,
@@ -18,10 +20,18 @@ const SHOP_LINKS = [
 
 const HOUSE_LINKS = [
   { label: "Notre bois", href: "/notre-bois" },
-  { label: "Livraison & zones", href: "/#livraison" },
+  { label: "Livraison & retours", href: "/livraison-retours" },
   { label: "Calculer mon volume", href: "/#livraison" },
   { label: "Devis professionnel", href: "/contact" },
   { label: "Contact", href: "/contact" },
+];
+
+const LEGAL_LINKS = [
+  { label: "CGV", href: "/cgv" },
+  { label: "CGU", href: "/cgu" },
+  { label: "Mentions légales", href: "/mentions-legales" },
+  { label: "Confidentialité", href: "/confidentialite" },
+  { label: "Livraison & retours", href: "/livraison-retours" },
 ];
 
 export function SiteFooter() {
@@ -67,12 +77,22 @@ export function SiteFooter() {
           <div className="col-span-2 md:col-span-2 p-4 md:py-6 md:px-0 md:pl-10 flex flex-col gap-2.5 border-t md:border-t-0 md:border-l border-neutral-100/22">
             <div className="flex items-center gap-2.5 text-sm">
               <IconMapPin size={18} className="text-accent-400" />
-              12 route de la Forêt, 67790 Steinbourg
+              {FULL_ADDRESS}
             </div>
-            <div className="flex items-center gap-2.5 text-sm">
+            <a
+              href={SITE.phoneHref}
+              className="flex items-center gap-2.5 text-sm hover:text-accent-400 transition-colors w-fit"
+            >
               <IconPhone size={18} className="text-accent-400" />
-              03 88 00 00 00 · lun–sam 8h–18h
-            </div>
+              {SITE.phone} · {SITE.hours.replace("lun–sam · ", "lun–sam ")}
+            </a>
+            <a
+              href={`mailto:${SITE.email}`}
+              className="flex items-center gap-2.5 text-sm hover:text-accent-400 transition-colors w-fit"
+            >
+              <IconMail size={18} className="text-accent-400" />
+              {SITE.email}
+            </a>
             <div className="flex items-center gap-2.5 text-sm">
               <IconTruckDelivery size={18} className="text-accent-400" />
               Alsace 100 km · dépôt Paris
@@ -84,17 +104,25 @@ export function SiteFooter() {
               <span className="w-[38px] h-[38px] grid place-items-center border border-neutral-100/30">
                 <IconBrandInstagram size={18} />
               </span>
-              <span className="w-[38px] h-[38px] grid place-items-center border border-neutral-100/30">
+              <a
+                href={`mailto:${SITE.email}`}
+                aria-label="Nous écrire par e-mail"
+                className="w-[38px] h-[38px] grid place-items-center border border-neutral-100/30 hover:bg-neutral-100/10 hover:text-accent-400 transition-colors"
+              >
                 <IconMail size={18} />
-              </span>
+              </a>
             </div>
           </div>
         </div>
 
         <div className="py-3.5 flex flex-wrap gap-x-3.5 gap-y-1 text-[11px] opacity-60">
-          <span>© 2026 Lux Bois Chauffage</span>
-          <span>CGV</span>
-          <span>Mentions légales</span>
+          <span>© 2026 {SITE.name}</span>
+          {LEGAL_LINKS.map((l) => (
+            <Link key={l.href} href={l.href} className="hover:text-accent-400 hover:opacity-100">
+              {l.label}
+            </Link>
+          ))}
+          <CookieSettingsButton className="hover:text-accent-400 hover:opacity-100" />
           <span>Paiement sécurisé</span>
         </div>
       </div>

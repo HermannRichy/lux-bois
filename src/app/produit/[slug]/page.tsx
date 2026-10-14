@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProducts, getProductBySlug } from "@/lib/catalog";
+import { SITE } from "@/lib/site";
 import { ProductDetail } from "@/components/product-detail";
 
 export async function generateStaticParams() {
@@ -17,8 +18,15 @@ export async function generateMetadata({
   const product = await getProductBySlug(slug);
   if (!product) return {};
   return {
-    title: `${product.name} — Lux Bois Chauffage`,
+    title: product.name,
     description: product.description,
+    alternates: { canonical: `/produit/${product.slug}` },
+    openGraph: {
+      type: "website",
+      url: `/produit/${product.slug}`,
+      title: `${product.name} — ${SITE.name}`,
+      description: product.description,
+    },
   };
 }
 

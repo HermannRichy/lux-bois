@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Tag } from "@/components/ui/tag";
 
@@ -14,6 +15,13 @@ const STEPS = [
   { n: "03", t: "Séchage 24 mois", b: "Sous hangar ouvert, ventilé, à l'abri de la pluie." },
   { n: "04", t: "Contrôle & livraison", b: "Taux d'humidité relevé à l'hygromètre avant chargement." },
 ];
+
+export const metadata: Metadata = {
+  title: "Notre bois",
+  description:
+    "Origine, coupe et séchage 24 mois : comment la scierie de Steinbourg prépare un bois sec, contrôlé à l'hygromètre avant chaque livraison.",
+  alternates: { canonical: "/notre-bois" },
+};
 
 export default function NotreBoisPage() {
   return (
