@@ -3,13 +3,43 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { IconTrash } from "@tabler/icons-react";
+import {
+  IconArrowBackUp,
+  IconDroplet,
+  IconLock,
+  IconTrash,
+  IconTruckDelivery,
+} from "@tabler/icons-react";
 import { useCart } from "@/context/cart-context";
 import { DELIVERY_OPTIONS } from "@/lib/products";
 import { EUR, unitPrice } from "@/lib/pricing";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site";
 import type { Product } from "@/lib/types";
+
+const REASSURANCE = [
+  {
+    icon: IconLock,
+    title: "Paiement sécurisé",
+    body: "Réglé sur la page de paiement sécurisée : aucune donnée bancaire ne passe par ce site.",
+  },
+  {
+    icon: IconDroplet,
+    title: "Bois sec garanti",
+    body: "Moins de 20 % d'humidité, relevé à l'hygromètre et joint au bon de livraison.",
+  },
+  {
+    icon: IconTruckDelivery,
+    title: "Livré en 48/72 h",
+    body: "Créneau de 2 h confirmé la veille par SMS, autour de Steinbourg et à Paris.",
+  },
+  {
+    icon: IconArrowBackUp,
+    title: "14 jours pour changer d'avis",
+    body: "Droit de rétractation pour les particuliers, reprise organisée avec vous.",
+    href: "/livraison-retours",
+  },
+] as const;
 
 export function CartView({ products }: { products: Product[] }) {
   const { lines, bump, remove, count } = useCart();
@@ -127,6 +157,33 @@ export function CartView({ products }: { products: Product[] }) {
               </div>
             </div>
           ))}
+
+          {resolved.length > 0 && (
+            <div className="grid grid-cols-2 gap-2.5 md:gap-3 px-4 md:px-0 py-5">
+              {REASSURANCE.map((r) => {
+                const card = (
+                  <>
+                    <r.icon size={24} className="text-accent shrink-0 transition-transform group-hover:scale-110" />
+                    <div className="font-heading font-extrabold text-[13px] md:text-sm leading-tight">
+                      {r.title}
+                    </div>
+                    <p className="text-[11px] md:text-xs text-text/55 m-0">{r.body}</p>
+                  </>
+                );
+                const cls =
+                  "group flex flex-col gap-2 p-3 md:p-4 bg-surface border border-divider transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[3px_3px_0_0_var(--color-text)]";
+                return "href" in r ? (
+                  <Link key={r.title} href={r.href} className={cls}>
+                    {card}
+                  </Link>
+                ) : (
+                  <div key={r.title} className={cls}>
+                    {card}
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           {resolved.length === 0 && (
             <div className="px-4 md:px-0 py-10 text-left">
