@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SITE, FULL_ADDRESS } from "@/lib/site";
+import { CookieSettingsButton } from "@/components/cookie-settings-button";
 import {
   IconMapPin,
   IconPhone,
@@ -121,6 +122,7 @@ export function SiteFooter() {
               {l.label}
             </Link>
           ))}
+          <CookieSettingsButton className="hover:text-accent-400 hover:opacity-100" />
           <span>Paiement sécurisé</span>
         </div>
       </div>

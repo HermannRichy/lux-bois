@@ -5,6 +5,7 @@ import { CartProvider } from "@/context/cart-context";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ContactFab } from "@/components/contact-fab";
+import { CookieConsent } from "@/components/cookie-consent";
 import { SITE } from "@/lib/site";
 
 const archivo = Archivo({
@@ -101,6 +102,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main className="flex-1">{children}</main>
           <SiteFooter />
           <ContactFab />
+          <CookieConsent />
         </CartProvider>
       </body>
     </html>

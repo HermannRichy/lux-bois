@@ -57,6 +57,13 @@ export default function ConfidentialitePage() {
           vous pouvez l&apos;effacer à tout moment depuis les réglages de votre navigateur.
         </p>
         <p>
+          Votre choix concernant la mesure d&apos;audience (clé « lbc-consent ») est
+          enregistré dans votre navigateur et redemandé tous les 6 mois. Aucun outil de
+          mesure n&apos;est actif à ce jour : si nous en activons un, il ne le sera
+          qu&apos;avec votre accord. Vous pouvez modifier votre choix à tout moment via
+          « Gérer les cookies » en bas de page.
+        </p>
+        <p>
           Le site n&apos;utilise pas de cookie publicitaire. La page de paiement, hébergée
           chez notre prestataire de e-commerce, peut déposer les cookies techniques
           nécessaires à son fonctionnement et à la sécurité du paiement.
