@@ -16,13 +16,7 @@ import {
   IconPlus,
   IconCheck,
 } from "@tabler/icons-react";
-import {
-  CATEGORIES,
-  ESSENCES,
-  LENGTHS,
-  SORTS,
-  type SortId,
-} from "@/lib/products";
+import { SORTS, type SortId } from "@/lib/products";
 import { EUR } from "@/lib/pricing";
 import { Button, IconButton } from "@/components/ui/button";
 import { useCart } from "@/context/cart-context";
@@ -30,7 +24,20 @@ import type { Product } from "@/lib/types";
 
 export function BoutiqueClient({ products }: { products: Product[] }) {
   const { add } = useCart();
-  const [cat, setCat] = useState<(typeof CATEGORIES)[number]>("Tout");
+  // Filtres construits à partir des produits réellement présents dans Shopify.
+  const CATEGORIES = useMemo(
+    () => ["Tout", ...Array.from(new Set(products.map((p) => p.category)))],
+    [products]
+  );
+  const ESSENCES = useMemo(
+    () => Array.from(new Set(products.map((p) => p.essence).filter(Boolean))),
+    [products]
+  );
+  const LENGTHS = useMemo(
+    () => Array.from(new Set(products.map((p) => p.length).filter((l) => l !== "—"))),
+    [products]
+  );
+  const [cat, setCat] = useState<string>("Tout");
   const [fEssences, setFEssences] = useState<string[]>([]);
   const [fLengths, setFLengths] = useState<string[]>([]);
   const [sort, setSort] = useState<SortId>("pop");
@@ -118,6 +125,8 @@ export function BoutiqueClient({ products }: { products: Product[] }) {
             </button>
           </div>
           <FilterGroups
+            essences={ESSENCES}
+            lengths={LENGTHS}
             products={products}
             fEssences={fEssences}
             fLengths={fLengths}
@@ -189,8 +198,8 @@ export function BoutiqueClient({ products }: { products: Product[] }) {
               Prix dégressif au volume
             </div>
             <p className="text-xs text-text/55 m-0">
-              1 stère 89 € · 3 stères 84 €/st · 5 stères et + 79 €/st. Remise appliquée
-              automatiquement au panier.
+              −5 €/stère dès 3 stères, −10 €/stère dès 5 stères sur les bûches. Remise
+              appliquée automatiquement au panier.
             </p>
           </div>
         </div>
@@ -221,6 +230,8 @@ export function BoutiqueClient({ products }: { products: Product[] }) {
             </div>
             <div className="overflow-y-auto flex-1">
               <FilterGroups
+                essences={ESSENCES}
+                lengths={LENGTHS}
                 products={products}
                 fEssences={fEssences}
                 fLengths={fLengths}
@@ -243,6 +254,8 @@ export function BoutiqueClient({ products }: { products: Product[] }) {
 }
 
 function FilterGroups({
+  essences,
+  lengths,
   products,
   fEssences,
   fLengths,
@@ -251,6 +264,8 @@ function FilterGroups({
   toggleLength,
   setSort,
 }: {
+  essences: string[];
+  lengths: string[];
   products: Product[];
   fEssences: string[];
   fLengths: string[];
@@ -269,7 +284,7 @@ function FilterGroups({
           </span>
         </div>
         <div className="flex flex-col gap-0.5">
-          {ESSENCES.map((e) => {
+          {essences.map((e) => {
             const active = fEssences.includes(e);
             const Icon = active ? IconSquareCheckFilled : IconSquare;
             const count = products.filter((p) => p.essence === e).length;
@@ -299,7 +314,7 @@ function FilterGroups({
           </span>
         </div>
         <div className="flex border border-divider w-fit">
-          {LENGTHS.map((l) => {
+          {lengths.map((l) => {
             const active = fLengths.includes(l);
             return (
               <button
