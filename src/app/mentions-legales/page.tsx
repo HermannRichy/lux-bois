@@ -20,8 +20,6 @@ export default function MentionsLegalesPage() {
         </p>
         <ul>
           <li>Forme juridique : {legal.legalForm}</li>
-          <li>SIRET : {legal.siret}</li>
-          <li>N° de TVA intracommunautaire : {legal.vatNumber}</li>
           <li>Siège et scierie : {FULL_ADDRESS}, {SITE.address.country}</li>
           <li>
             Téléphone : <a href={SITE.phoneHref}>{SITE.phone}</a> ({SITE.hours})

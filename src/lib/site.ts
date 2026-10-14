@@ -20,17 +20,14 @@ export const SITE = {
     city: "Steinbourg",
     country: "France",
   },
-  // À compléter avec les informations d'immatriculation avant mise en ligne.
   legal: {
     companyName: "Lux Bois Chauffage",
-    legalForm: "[forme juridique à compléter]",
-    siret: "[SIRET à compléter]",
-    vatNumber: "[n° de TVA intracommunautaire à compléter]",
-    publicationDirector: "[nom du responsable de publication à compléter]",
+    legalForm: "Entreprise individuelle",
+    publicationDirector: "KALLEL Younes",
   },
   host: {
-    name: "[hébergeur à compléter]",
-    address: "[adresse de l'hébergeur à compléter]",
+    name: "Hostinger International Ltd.",
+    address: "61 Lordou Vironos Street, 6023 Larnaca, Chypre",
   },
   lastUpdate: "14 octobre 2026",
 } as const;
