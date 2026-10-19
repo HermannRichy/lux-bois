@@ -43,7 +43,7 @@ export default async function ProductPage({
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: product.img,
+    image: product.images.length > 0 ? product.images : product.img,
     sku: product.id,
     category: product.category,
     brand: { "@type": "Brand", name: SITE.name },

@@ -5,7 +5,10 @@ export type ProductUnit = "stère" | "palette" | "sac";
 export interface Product {
   id: string;
   slug: string;
+  /** Première image (vignettes, listes). */
   img: string;
+  /** Toutes les images du produit, dans l'ordre Shopify (img en est la première). */
+  images: string[];
   name: string;
   category: ProductCategory;
   essence: string;

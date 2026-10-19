@@ -42,7 +42,7 @@ const PRODUCTS_QUERY = /* GraphQL */ `
         description
         productType
         tags
-        images(first: 1) {
+        images(first: 10) {
           nodes {
             url
           }
@@ -95,6 +95,7 @@ function mapProduct(node: ShopifyProductNode): Product {
     id: node.handle,
     slug: node.handle,
     img: node.images.nodes[0]?.url ?? "",
+    images: node.images.nodes.map((i) => i.url),
     name: node.title,
     category: (node.productType || "Bûches") as ProductCategory,
     essence,
