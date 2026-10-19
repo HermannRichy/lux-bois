@@ -107,7 +107,7 @@ export function CartView({ products }: { products: Product[] }) {
             >
               <Link
                 href={`/produit/${product.slug}`}
-                className="w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden bg-neutral-300 grayscale-photo relative"
+                className="w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden bg-neutral-300 relative"
               >
                 <Image src={product.img} alt="" fill sizes="80px" className="object-cover" />
               </Link>

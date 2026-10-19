@@ -30,7 +30,7 @@ export default function NotreBoisPage() {
         <h4 className="text-xl md:text-4xl">Notre bois</h4>
       </div>
 
-      <div className="h-[230px] md:h-[380px] overflow-hidden grayscale-photo relative">
+      <div className="h-[230px] md:h-[380px] overflow-hidden relative">
         <Image
           src="https://images.unsplash.com/photo-1672984581785-60e0ff402fd4?auto=format&fit=crop&q=70&w=1600&h=900"
           alt="Hangar de séchage du bois"

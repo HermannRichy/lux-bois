@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { IconArrowLeft, IconCheck, IconShoppingCart } from "@tabler/icons-react";
 import type { Product } from "@/lib/types";
 import { EUR } from "@/lib/pricing";
 import { unitPrice, discountNote } from "@/lib/pricing";
 import { Tag } from "@/components/ui/tag";
+import { ProductGallery } from "@/components/product-gallery";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/cart-context";
 
@@ -43,16 +43,7 @@ export function ProductDetail({ product }: { product: Product }) {
       </div>
 
       <div className="md:grid md:grid-cols-2 md:gap-10">
-        <div className="h-[260px] md:h-[480px] overflow-hidden grayscale-photo relative">
-          <Image
-            src={product.img}
-            alt={product.name}
-            fill
-            sizes="(min-width: 768px) 50vw, 100vw"
-            className="object-cover"
-            priority
-          />
-        </div>
+        <ProductGallery images={product.images} name={product.name} />
 
         <div>
           <div className="px-4 md:px-0 py-4.5 md:py-0 md:mt-0 flex flex-col gap-3 border-b-2 border-divider md:border-0">

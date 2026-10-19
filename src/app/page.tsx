@@ -52,7 +52,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="relative h-[280px] md:h-[420px] overflow-hidden grayscale-photo">
+      <section className="relative h-[280px] md:h-[420px] overflow-hidden">
         <Image
           src="https://images.unsplash.com/photo-1576791606138-89367074a68f?auto=format&fit=crop&q=70&w=1600&h=900"
           alt="Pile de bois de chauffage fendu"
@@ -118,7 +118,7 @@ export default async function HomePage() {
               href={`/produit/${p.slug}`}
               className="group flex flex-col bg-surface transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--color-text)]"
             >
-              <div className="h-[104px] md:h-40 overflow-hidden bg-neutral-300 grayscale-photo relative">
+              <div className="h-[104px] md:h-40 overflow-hidden bg-neutral-300 relative">
                 <Image src={p.img} alt="" fill sizes="25vw" className="object-cover transition-transform duration-500 group-hover:scale-110" />
               </div>
               <div className="p-2.5 flex flex-col gap-1.5 flex-1">
