@@ -27,7 +27,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
   return (
     <div className="flex flex-col gap-2.5" onKeyDown={onKeyDown}>
       <div
-        className="relative h-[260px] md:h-[480px] overflow-hidden grayscale-photo bg-neutral-300"
+        className="relative h-[260px] md:h-[480px] overflow-hidden bg-neutral-300"
         onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
         onTouchEnd={(e) => {
           if (touchX.current === null) return;
@@ -80,7 +80,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
                 aria-selected={i === index}
                 aria-label={`Voir la photo ${i + 1}`}
                 onClick={() => go(i)}
-                className={`relative w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden grayscale-photo cursor-pointer border-2 transition ${
+                className={`relative w-16 h-16 md:w-20 md:h-20 shrink-0 overflow-hidden cursor-pointer border-2 transition ${
                   i === index ? "border-accent" : "border-transparent opacity-70 hover:opacity-100"
                 }`}
               >

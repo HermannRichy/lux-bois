@@ -225,7 +225,7 @@ export function SearchDialog({ onClose }: { onClose: () => void }) {
                     i === active ? "bg-accent-100" : ""
                   }`}
                 >
-                  <span className="relative w-14 h-14 shrink-0 overflow-hidden bg-neutral-300 grayscale-photo">
+                  <span className="relative w-14 h-14 shrink-0 overflow-hidden bg-neutral-300">
                     <Image src={p.img} alt="" fill sizes="56px" className="object-cover" />
                   </span>
                   <span className="flex-1 min-w-0">

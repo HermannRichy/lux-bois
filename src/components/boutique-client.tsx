@@ -147,7 +147,7 @@ export function BoutiqueClient({ products }: { products: Product[] }) {
               >
                 <Link
                   href={`/produit/${p.slug}`}
-                  className="w-[92px] h-[92px] md:w-32 md:h-32 shrink-0 overflow-hidden bg-neutral-300 grayscale-photo relative"
+                  className="w-[92px] h-[92px] md:w-32 md:h-32 shrink-0 overflow-hidden bg-neutral-300 relative"
                 >
                   <Image src={p.img} alt="" fill sizes="130px" className="object-cover transition-transform duration-500 group-hover:scale-110" />
                 </Link>
