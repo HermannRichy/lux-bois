@@ -57,14 +57,18 @@ export default function ConfidentialitePage() {
           vous pouvez l&apos;effacer à tout moment depuis les réglages de votre navigateur.
         </p>
         <p>
-          Votre choix concernant la mesure d&apos;audience (clé « lbc-consent ») est
-          enregistré dans votre navigateur et redemandé tous les 6 mois. Aucun outil de
-          mesure n&apos;est actif à ce jour : si nous en activons un, il ne le sera
-          qu&apos;avec votre accord. Vous pouvez modifier votre choix à tout moment via
-          « Gérer les cookies » en bas de page.
+          Votre choix concernant la mesure d&apos;audience et le suivi de campagne (clé
+          « lbc-consent ») est enregistré dans votre navigateur et redemandé tous les 6
+          mois. Si vous l&apos;acceptez, nous chargeons l&apos;outil de suivi de campagne
+          SiteWit, qui peut déposer des cookies ou identifiants et mesurer vos visites afin
+          d&apos;évaluer l&apos;efficacité de nos annonces. Sans votre accord, cet outil
+          n&apos;est pas chargé. Vous pouvez modifier votre choix à tout moment via « Gérer
+          les cookies » en bas de page ; un retrait prend pleinement effet au prochain
+          chargement de page.
         </p>
         <p>
-          Le site n&apos;utilise pas de cookie publicitaire. La page de paiement, hébergée
+          Hors suivi de campagne consenti, le site n&apos;utilise pas de cookie publicitaire.
+          La page de paiement, hébergée
           chez notre prestataire de e-commerce, peut déposer les cookies techniques
           nécessaires à son fonctionnement et à la sécurité du paiement.
         </p>
@@ -74,7 +78,8 @@ export default function ConfidentialitePage() {
         <p>
           Vos données sont destinées à {SITE.name} et à ses prestataires techniques,
           uniquement pour les besoins décrits ci-dessus : plateforme de e-commerce et de
-          paiement, hébergeur du site, transporteur ou livreur le cas échéant. Elles ne
+          paiement, hébergeur du site, transporteur ou livreur le cas échéant et, avec votre
+          accord, SiteWit (suivi de campagne publicitaire). Elles ne
           sont ni vendues ni cédées à des tiers à des fins commerciales.
         </p>
       </LegalSection>

@@ -1,5 +1,5 @@
 export interface Consent {
-  /** Mesure d'audience. Aucun outil n'est actif aujourd'hui : ce choix le conditionnera. */
+  /** Mesure d'audience et suivi de campagne (SiteWit) : ne se charge qu'avec ce choix. */
   analytics: boolean;
   /** Horodatage du choix (ms). */
   at: number;

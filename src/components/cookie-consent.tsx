@@ -61,9 +61,9 @@ export function CookieConsent() {
         <h2 className="text-base">Cookies &amp; confidentialité</h2>
       </div>
       <p id="cookie-desc" className="text-xs text-text/70 m-0">
-        Nous utilisons uniquement le stockage nécessaire au site (votre panier). Aucun
-        traceur publicitaire. Vous choisissez si la mesure d&apos;audience anonyme peut
-        être activée.{" "}
+        Nous utilisons le stockage nécessaire au site (votre panier). Avec votre accord,
+        nous activons aussi la mesure d&apos;audience et le suivi de nos campagnes
+        publicitaires (SiteWit).{" "}
         <Link href="/confidentialite" className="text-accent underline underline-offset-2">
           En savoir plus
         </Link>
@@ -87,9 +87,9 @@ export function CookieConsent() {
             />
             <span className="text-xs">
               <strong className="font-heading font-extrabold block text-sm">
-                Mesure d&apos;audience
+                Audience &amp; campagnes
               </strong>
-              Statistiques de fréquentation anonymes pour améliorer le site.
+              Statistiques de fréquentation et suivi de nos campagnes publicitaires (SiteWit).
             </span>
           </label>
         </div>
