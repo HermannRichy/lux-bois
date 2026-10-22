@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ContactFab } from "@/components/contact-fab";
 import { CookieConsent } from "@/components/cookie-consent";
+import { SitewitScript } from "@/components/sitewit-script";
 import { SITE } from "@/lib/site";
 
 const archivo = Archivo({
@@ -111,6 +112,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <SiteFooter />
           <ContactFab />
           <CookieConsent />
+          <SitewitScript />
         </CartProvider>
       </body>
     </html>
