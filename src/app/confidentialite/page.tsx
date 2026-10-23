@@ -57,14 +57,21 @@ export default function ConfidentialitePage() {
           vous pouvez l&apos;effacer à tout moment depuis les réglages de votre navigateur.
         </p>
         <p>
-          Votre choix concernant la mesure d&apos;audience et le suivi de campagne (clé
-          « lbc-consent ») est enregistré dans votre navigateur et redemandé tous les 6
+          Votre choix concernant la mesure d&apos;audience, le suivi de campagne et le chat
+          (clé « lbc-consent ») est enregistré dans votre navigateur et redemandé tous les 6
           mois. Si vous l&apos;acceptez, nous chargeons l&apos;outil de suivi de campagne
           SiteWit, qui peut déposer des cookies ou identifiants et mesurer vos visites afin
           d&apos;évaluer l&apos;efficacité de nos annonces. Sans votre accord, cet outil
           n&apos;est pas chargé. Vous pouvez modifier votre choix à tout moment via « Gérer
           les cookies » en bas de page ; un retrait prend pleinement effet au prochain
           chargement de page.
+        </p>
+        <p>
+          De même, le chat en direct Tidio n&apos;est chargé qu&apos;avec votre accord. Une
+          fois chargé, Tidio peut déposer des cookies ou identifiants, recevoir votre
+          adresse IP et conserver le contenu de vos échanges avec nous afin de permettre la
+          conversation. Sans votre accord, vous pouvez toujours nous joindre par téléphone
+          ou par e-mail.
         </p>
         <p>
           Hors suivi de campagne consenti, le site n&apos;utilise pas de cookie publicitaire.
@@ -79,7 +86,7 @@ export default function ConfidentialitePage() {
           Vos données sont destinées à {SITE.name} et à ses prestataires techniques,
           uniquement pour les besoins décrits ci-dessus : plateforme de e-commerce et de
           paiement, hébergeur du site, transporteur ou livreur le cas échéant et, avec votre
-          accord, SiteWit (suivi de campagne publicitaire). Elles ne
+          accord, SiteWit (suivi de campagne publicitaire) et Tidio (chat en direct). Elles ne
           sont ni vendues ni cédées à des tiers à des fins commerciales.
         </p>
       </LegalSection>

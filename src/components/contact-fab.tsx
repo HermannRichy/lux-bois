@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { IconChevronRight, IconMail, IconMessageCircle2, IconPhone, IconX } from "@tabler/icons-react";
 import { SITE } from "@/lib/site";
+import { useConsent } from "@/lib/use-consent";
 
 const ACTIONS = [
   {
@@ -24,6 +25,8 @@ export function ContactFab() {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  // Le lanceur du chat Tidio occupe le coin bas droit : le bouton passe au-dessus.
+  const chatActive = useConsent()?.chat === true;
 
   // Sur le panier et les fiches produit, une barre d'achat fixe occupe le bas
   // de l'écran mobile : le bouton se place au-dessus d'elle.
@@ -47,7 +50,13 @@ export function ContactFab() {
     <div
       ref={rootRef}
       className={`fixed right-4 md:right-6 z-40 flex flex-col items-end gap-3 transition-[bottom] duration-300 ${
-        hasBottomBar ? "bottom-24 md:bottom-6" : "bottom-5 md:bottom-6"
+        chatActive
+          ? hasBottomBar
+            ? "bottom-44 md:bottom-28"
+            : "bottom-28"
+          : hasBottomBar
+            ? "bottom-24 md:bottom-6"
+            : "bottom-5 md:bottom-6"
       }`}
     >
       {open && (
