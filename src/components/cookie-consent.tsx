@@ -25,15 +25,18 @@ export function CookieConsent() {
   // Côté serveur on suppose un choix déjà fait : pas de bandeau dans le HTML
   // initial, il apparaît après hydratation si aucun choix valide n'existe.
   const raw = useSyncExternalStore(subscribe, readConsentRaw, () => "server");
-  const consent = raw === "server" ? { analytics: false, at: 0 } : parseConsent(raw);
+  const consent = raw === "server" ? { analytics: false, chat: false, at: 0 } : parseConsent(raw);
 
   const [reopened, setReopened] = useState(false);
   const [custom, setCustom] = useState(false);
   const [analytics, setAnalytics] = useState(false);
+  const [chat, setChat] = useState(false);
 
   useEffect(() => {
     const open = () => {
-      setAnalytics(parseConsent(readConsentRaw())?.analytics ?? false);
+      const current = parseConsent(readConsentRaw());
+      setAnalytics(current?.analytics ?? false);
+      setChat(current?.chat ?? false);
       setCustom(true);
       setReopened(true);
     };
@@ -43,8 +46,8 @@ export function CookieConsent() {
 
   if (consent && !reopened) return null;
 
-  const choose = (value: boolean) => {
-    saveConsent(value);
+  const choose = (choice: { analytics: boolean; chat: boolean }) => {
+    saveConsent(choice);
     setReopened(false);
     setCustom(false);
   };
@@ -63,7 +66,7 @@ export function CookieConsent() {
       <p id="cookie-desc" className="text-xs text-text/70 m-0">
         Nous utilisons le stockage nécessaire au site (votre panier). Avec votre accord,
         nous activons aussi la mesure d&apos;audience et le suivi de nos campagnes
-        publicitaires (SiteWit).{" "}
+        publicitaires (SiteWit), ainsi que le chat en direct (Tidio).{" "}
         <Link href="/confidentialite" className="text-accent underline underline-offset-2">
           En savoir plus
         </Link>
@@ -92,23 +95,35 @@ export function CookieConsent() {
               Statistiques de fréquentation et suivi de nos campagnes publicitaires (SiteWit).
             </span>
           </label>
+          <label className="flex items-start gap-3 p-3 border-t border-divider cursor-pointer hover:bg-text/[0.03]">
+            <input
+              type="checkbox"
+              checked={chat}
+              onChange={(e) => setChat(e.target.checked)}
+              className="mt-0.5 accent-[var(--color-accent)]"
+            />
+            <span className="text-xs">
+              <strong className="font-heading font-extrabold block text-sm">Chat en direct</strong>
+              Messagerie instantanée avec notre équipe (Tidio).
+            </span>
+          </label>
         </div>
       )}
 
       <div className="flex flex-col sm:flex-row gap-2">
         {custom ? (
-          <Button className="flex-1 py-2.5" onClick={() => choose(analytics)}>
+          <Button className="flex-1 py-2.5" onClick={() => choose({ analytics, chat })}>
             Enregistrer mes choix
           </Button>
         ) : (
           <>
-            <Button variant="secondary" className="flex-1 py-2.5" onClick={() => choose(false)}>
+            <Button variant="secondary" className="flex-1 py-2.5" onClick={() => choose({ analytics: false, chat: false })}>
               Tout refuser
             </Button>
             <Button variant="secondary" className="flex-1 py-2.5" onClick={() => setCustom(true)}>
               Personnaliser
             </Button>
-            <Button className="flex-1 py-2.5" onClick={() => choose(true)}>
+            <Button className="flex-1 py-2.5" onClick={() => choose({ analytics: true, chat: true })}>
               Tout accepter
             </Button>
           </>
