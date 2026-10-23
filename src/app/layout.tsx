@@ -4,7 +4,6 @@ import "./globals.css";
 import { CartProvider } from "@/context/cart-context";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { ContactFab } from "@/components/contact-fab";
 import { CookieConsent } from "@/components/cookie-consent";
 import { SitewitScript } from "@/components/sitewit-script";
 import { TidioScript } from "@/components/tidio-script";
@@ -28,12 +27,11 @@ export const metadata: Metadata = {
     "bûches",
     "granulés",
     "bois de cuisson",
-    "livraison bois Alsace",
+    "livraison bois de chauffage France",
     "bois sec",
     "stère",
     "Steinbourg",
     "Bas-Rhin",
-    "Paris",
   ],
   authors: [{ name: SITE.name, url: SITE.url }],
   creator: SITE.name,
@@ -87,7 +85,7 @@ const jsonLd = {
     opens: "08:00",
     closes: "18:00",
   },
-  areaServed: ["Alsace", "Paris"],
+  areaServed: "FR",
   foundingDate: "1974",
 };
 
@@ -111,7 +109,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
           </main>
           <SiteFooter />
-          <ContactFab />
           <CookieConsent />
           <SitewitScript />
           <TidioScript />

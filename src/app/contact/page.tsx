@@ -58,7 +58,7 @@ export default function ContactPage() {
             {SITE.email}
           </a>
           <div className="text-xs text-text/55">
-            {SITE.hours} · Steinbourg &amp; dépôt Paris
+            {SITE.hours} · livraison partout en France
           </div>
         </div>
       </div>

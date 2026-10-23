@@ -95,7 +95,7 @@ export function SiteFooter() {
             </a>
             <div className="flex items-center gap-2.5 text-sm">
               <IconTruckDelivery size={18} className="text-accent-400" />
-              Alsace 100 km · dépôt Paris
+              Livraison partout en France
             </div>
             <div className="flex gap-2 mt-1">
               <span className="w-[38px] h-[38px] grid place-items-center border border-neutral-100/30">

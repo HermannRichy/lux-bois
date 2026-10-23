@@ -14,7 +14,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     return renderOgImage({
       eyebrow: "Boutique",
       title: "Bois de chauffage",
-      subtitle: "Livraison en Alsace et à Paris.",
+      subtitle: "Livraison partout en France.",
     });
   }
 

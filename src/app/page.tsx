@@ -138,10 +138,10 @@ export default async function HomePage() {
       <section id="livraison" className="bg-accent text-bg px-4 md:px-8 py-6 md:py-12 flex flex-col gap-2.5">
         <div className="md:max-w-6xl md:mx-auto md:w-full flex flex-col gap-2.5">
           <span className="font-mono text-[10px] tracking-[0.16em] uppercase opacity-85">
-            Zone de livraison
+            Livraison
           </span>
           <div className="font-heading font-extrabold text-[28px] md:text-4xl leading-[1.05] max-w-xl">
-            100 km autour de Steinbourg. Et un dépôt à Paris.
+            Livrés partout en France.
           </div>
           <p className="text-[13px] md:text-base opacity-90 max-w-md">
             Déchargement au plus près du stockage. Créneau confirmé la veille par SMS.

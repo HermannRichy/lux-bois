@@ -6,9 +6,9 @@ export const SITE = {
   name: "Lux Bois Chauffage",
   shortName: "Lux Bois",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://luxboischauffage.com",
-  tagline: "Bois de chauffage livré en Alsace",
+  tagline: "Bois de chauffage livré partout en France",
   description:
-    "Bûches, granulés et bois de cuisson séchés 24 mois, livrés en 48/72 h autour de Steinbourg et à Paris.",
+    "Bûches, granulés et bois de cuisson séchés 24 mois, livrés en 48/72 h partout en France.",
   phone: "06 38 88 40 61",
   phoneHref: "tel:+33638884061",
   phoneIntl: "+33638884061",

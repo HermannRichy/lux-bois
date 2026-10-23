@@ -31,7 +31,7 @@ const REASSURANCE = [
   {
     icon: IconTruckDelivery,
     title: "Livré en 48/72 h",
-    body: "Créneau de 2 h confirmé la veille par SMS, autour de Steinbourg et à Paris.",
+    body: "Créneau de 2 h confirmé la veille par SMS, partout en France.",
   },
   {
     icon: IconArrowBackUp,
@@ -214,7 +214,7 @@ export function CartView({ products }: { products: Product[] }) {
                 Livraison
               </div>
               <div className="text-[13px]">
-                Steinbourg + 100 km · créneau 48/72 h
+                Partout en France · créneau 48/72 h
               </div>
               <div className="flex flex-col gap-2">
                 {DELIVERY_OPTIONS.map((d) => (

@@ -6,7 +6,7 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Livraison & retours",
   description:
-    "Zones de livraison autour de Steinbourg et à Paris, délais de 48/72 h, créneau de 2 h, déchargement, réclamations et rétractation.",
+    "Livraison partout en France, délais de 48/72 h, créneau de 2 h, déchargement, réclamations et rétractation.",
   alternates: { canonical: "/livraison-retours" },
 };
 
@@ -17,20 +17,11 @@ export default function LivraisonRetoursPage() {
       intro="Comment et quand votre bois arrive, ce qu'il faut vérifier à la réception, et que faire en cas de souci."
       current="/livraison-retours"
     >
-      <LegalSection n={1} title="Zones de livraison">
-        <ul>
-          <li>
-            <strong>Alsace</strong> : dans un rayon d&apos;environ 100 km autour de
-            Steinbourg.
-          </li>
-          <li>
-            <strong>Paris</strong> : livraison depuis notre dépôt parisien.
-          </li>
-        </ul>
+      <LegalSection n={1} title="Zone de livraison">
         <p>
-          Votre adresse est hors de ces zones ? Appelez-nous au{" "}
-          <a href={SITE.phoneHref}>{SITE.phone}</a> ou écrivez à{" "}
-          <a href={`mailto:${SITE.email}`}>{SITE.email}</a> : nous étudions chaque demande.
+          Nous livrons <strong>partout en France</strong>. Une question sur votre adresse ou
+          votre accès ? Appelez-nous au <a href={SITE.phoneHref}>{SITE.phone}</a> ou écrivez
+          à <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
         </p>
       </LegalSection>
 

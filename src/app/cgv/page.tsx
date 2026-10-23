@@ -66,7 +66,7 @@ export default function CgvPage() {
         <p>
           La commande est conclue lorsque le paiement est confirmé. Vous recevez alors une
           confirmation par e-mail. {SITE.name} peut refuser ou annuler une commande en cas
-          de litige existant, d&apos;adresse située hors zone de livraison, d&apos;accès
+          de litige existant, d&apos;adresse impossible à desservir, d&apos;accès
           impraticable pour le camion ou d&apos;erreur manifeste de prix ; le client est
           alors intégralement remboursé.
         </p>
@@ -83,13 +83,12 @@ export default function CgvPage() {
 
       <LegalSection n={6} title="Livraison">
         <p>
-          La livraison est assurée dans un rayon d&apos;environ 100 km autour de Steinbourg
-          et à Paris (dépôt). Le délai indicatif est de 48 à 72 h après la commande ; un
+          La livraison est assurée partout en France. Le délai indicatif est de 48 à 72 h après la commande ; un
           créneau de 2 h est confirmé la veille par SMS. Deux modes sont proposés :
           déchargement en vrac (gratuit) ou livraison rangée sur palette (+ 29 €).
         </p>
         <p>
-          Le détail des zones, de l&apos;accès et des vérifications à la réception figure
+          Le détail de la livraison, de l&apos;accès et des vérifications à la réception figure
           sur la page <Link href="/livraison-retours">Livraison &amp; retours</Link>.
         </p>
         <p>
